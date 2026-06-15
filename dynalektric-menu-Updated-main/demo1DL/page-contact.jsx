@@ -77,8 +77,8 @@ function PageContact({ navigate }) {
     if (!form.company.trim()) errs.company = 'Required';
     if (!form.email.trim())   errs.email   = 'Required';
     else if (!/.+@.+\..+/.test(form.email)) errs.email = 'Invalid email';
+    if (!form.phone.trim())   errs.phone   = 'Required';
     if (!form.country.trim()) errs.country = 'Required';
-    if (!form.message.trim()) errs.message = 'Required';
     setErrors(errs);
     if (Object.keys(errs).length === 0) {
       // CRM-ready payload (logged for prototype). In production this would
@@ -217,38 +217,41 @@ function PageContact({ navigate }) {
       <section className="container">
         <div className="contact-grid">
           <form className="contact-form reveal" onSubmit={submit} noValidate>
-            <div className="form-section-head">
-              <div className="mono" style={{ color: 'var(--accent)', fontWeight: 600 }}>Contact</div>
-              <h3>Tell us who you are.</h3>
-            </div>
+            <div className="who-you-are-block">
+              <div className="form-section-head">
+                <div className="mono" style={{ color: 'var(--red)', fontWeight: 600 }}>Contact</div>
+                <h3>Tell us who you are.</h3>
+              </div>
 
-            <div className="contact-form-row">
-              <div className="form-row">
-                <label>Name *</label>
-                <input value={form.name} onChange={e => set('name', e.target.value)} placeholder="Full name" />
-                {errors.name && <span className="form-err">{errors.name}</span>}
+              <div className="contact-form-row">
+                <div className="form-row">
+                  <label>Name *</label>
+                  <input value={form.name} onChange={e => set('name', e.target.value)} placeholder="Full name" />
+                  {errors.name && <span className="form-err">{errors.name}</span>}
+                </div>
+                <div className="form-row">
+                  <label>Company *</label>
+                  <input value={form.company} onChange={e => set('company', e.target.value)} placeholder="Organisation name" />
+                  {errors.company && <span className="form-err">{errors.company}</span>}
+                </div>
+              </div>
+              <div className="contact-form-row">
+                <div className="form-row">
+                  <label>Email *</label>
+                  <input type="email" value={form.email} onChange={e => set('email', e.target.value)} placeholder="you@company.com" />
+                  {errors.email && <span className="form-err">{errors.email}</span>}
+                </div>
+                <div className="form-row">
+                  <label>Phone *</label>
+                  <input required value={form.phone} onChange={e => set('phone', e.target.value)} placeholder="+ country code, number" />
+                  {errors.phone && <span className="form-err">{errors.phone}</span>}
+                </div>
               </div>
               <div className="form-row">
-                <label>Company *</label>
-                <input value={form.company} onChange={e => set('company', e.target.value)} placeholder="Organisation name" />
-                {errors.company && <span className="form-err">{errors.company}</span>}
+                <label>Country *</label>
+                <input value={form.country} onChange={e => set('country', e.target.value)} placeholder="e.g. Germany, UAE, USA, India" />
+                {errors.country && <span className="form-err">{errors.country}</span>}
               </div>
-            </div>
-            <div className="contact-form-row">
-              <div className="form-row">
-                <label>Email *</label>
-                <input type="email" value={form.email} onChange={e => set('email', e.target.value)} placeholder="you@company.com" />
-                {errors.email && <span className="form-err">{errors.email}</span>}
-              </div>
-              <div className="form-row">
-                <label>Phone</label>
-                <input value={form.phone} onChange={e => set('phone', e.target.value)} placeholder="+ country code, number" />
-              </div>
-            </div>
-            <div className="form-row">
-              <label>Country *</label>
-              <input value={form.country} onChange={e => set('country', e.target.value)} placeholder="e.g. Germany, UAE, USA, India" />
-              {errors.country && <span className="form-err">{errors.country}</span>}
             </div>
 
             <div className="form-section-head" style={{ marginTop: 32 }}>
@@ -292,14 +295,13 @@ function PageContact({ navigate }) {
             </div>
 
             <div className="form-row">
-              <label>Message or requirement details *</label>
+              <label>Message or requirement details</label>
               <textarea
                 rows="5"
                 value={form.message}
                 onChange={e => set('message', e.target.value)}
                 placeholder="Application, specification, ratings, environment, timeline."
               ></textarea>
-              {errors.message && <span className="form-err">{errors.message}</span>}
             </div>
 
             <div className="form-row">

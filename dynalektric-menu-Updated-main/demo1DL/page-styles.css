@@ -1150,7 +1150,7 @@
   display: flex;
   flex-direction: column;
 }
-.why-item .num { color: var(--accent); display: block; margin-bottom: 24px; font-weight: 600; }
+.why-item .num { color: var(--red); display: block; margin-bottom: 24px; font-weight: 600; }
 .why-item h3 { margin-bottom: 12px; font-size: 18px; }
 .why-item p { font-size: 14px; line-height: 1.6; }
 @media (max-width: 900px) { .why-grid { grid-template-columns: 1fr; } }
@@ -1321,7 +1321,7 @@
   display: flex;
   flex-direction: column;
 }
-.about-cap-item .num { color: var(--accent); margin-bottom: 24px; display: block; font-weight: 600; }
+.about-cap-item .num { color: var(--red); margin-bottom: 24px; display: block; font-weight: 600; }
 .about-cap-item h3 { margin-bottom: 12px; flex-shrink: 0; font-size: 20px; line-height: 1.25; }
 .about-cap-item p { font-size: 14px; line-height: 1.6; }
 @media (max-width: 900px) { .about-cap-grid { grid-template-columns: 1fr; } }
@@ -1612,7 +1612,7 @@
   background: var(--bg-card);
   align-items: start;
 }
-.industry-card .num { font-family: var(--font-mono); font-size: 11px; color: var(--accent); letter-spacing: 0.1em; font-weight: 600; }
+.industry-card .num { font-family: var(--font-mono); font-size: 11px; color: var(--red); letter-spacing: 0.1em; font-weight: 600; }
 .industry-card h3 { margin-bottom: 12px; font-size: 20px; }
 .industry-card .body { font-size: 14px; line-height: 1.6; color: var(--ink-soft); }
 .industry-card .apps { display: flex; flex-direction: column; gap: 1px; background: var(--rule-soft); border: 1px solid var(--rule-soft); }
@@ -1793,7 +1793,7 @@
   font-weight: 350;
   letter-spacing: -0.03em;
   line-height: 1;
-  color: var(--accent);
+  color: var(--red);
 }
 .process-step h4 { font-size: 16px; }
 .process-step p { font-size: 13px; }
@@ -1901,7 +1901,7 @@
 }
 .subcat-card:hover { background: var(--bg-alt); }
 .subcat-card-code {
-  color: var(--accent);
+  color: var(--red);
   font-weight: 600;
   margin-bottom: 4px;
 }
@@ -2048,7 +2048,7 @@
   min-height: 280px;
 }
 .export-doc-card .num {
-  color: var(--accent);
+  color: var(--red);
   font-family: var(--font-mono);
   font-size: 11px;
   letter-spacing: 0.1em;
@@ -2248,7 +2248,7 @@
   min-height: 200px;
 }
 .export-logistics-card .num {
-  color: var(--accent);
+  color: var(--red);
   font-family: var(--font-mono);
   font-size: 11px;
   letter-spacing: 0.1em;
@@ -2290,7 +2290,7 @@
 }
 .cat-export-head:hover { background: var(--bg-alt); }
 .cat-export-head .num {
-  color: var(--accent);
+  color: var(--red);
   font-weight: 600;
   margin-bottom: 6px;
 }
@@ -2407,6 +2407,36 @@
   font-size: 22px;
   letter-spacing: -0.015em;
   margin-top: 8px;
+}
+
+/* "Tell Us Who You Are" highlighted container */
+.who-you-are-block {
+  background: var(--bg-alt);
+  border: 1px solid var(--rule);
+  border-left: 3px solid var(--red);
+  padding: 28px 28px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  margin-bottom: 8px;
+}
+.who-you-are-block .form-section-head {
+  margin-bottom: 0;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--rule);
+}
+.who-you-are-block .form-section-head h3 {
+  font-size: 26px;
+  margin-top: 10px;
+}
+@media (max-width: 600px) {
+  .who-you-are-block {
+    padding: 20px 16px 16px;
+    gap: 20px;
+  }
+  .who-you-are-block .form-section-head h3 {
+    font-size: 22px;
+  }
 }
 .form-err {
   color: var(--accent);
