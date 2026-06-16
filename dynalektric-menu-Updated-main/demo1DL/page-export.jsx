@@ -1,11 +1,218 @@
-/* page-export.jsx — Export page: supplier qualification for global industrial buyers
-   Nine sections. One H1. Montserrat throughout. Priority weight on Trust, Certifications,
-   Destination-Market Clearance. No invented certificate or registration numbers. */
+/* page-export.jsx — Export page: 10-section IA revision
+   Montserrat throughout. No invented data. All status values pending client approval.
+   Analytics preserved. Reuses all existing datasets and components from page-export-data.jsx. */
 
+/* ============================================================
+   COMPONENT: Export Capability Overview — 3 tabs
+   Quality & Manufacturing | Trade Compliance | ESG & Carbon Readiness
+   ============================================================ */
+function ExportCapabilityTabs() {
+  const [tab, setTab] = React.useState(0);
+  const TABS = ['Quality & Manufacturing', 'Trade Compliance', 'ESG & Carbon Readiness'];
+
+  return (
+    <div className="exp-tabs-wrap">
+      <div className="exp-tabs" role="tablist" aria-label="Export capability overview">
+        {TABS.map((t, i) => (
+          <button
+            key={i}
+            role="tab"
+            aria-selected={tab === i}
+            aria-controls={`exp-tabpanel-cap-${i}`}
+            id={`exp-tab-cap-${i}`}
+            className={`exp-tab-btn ${tab === i ? 'is-active' : ''}`}
+            onClick={() => { setTab(i); exportTrack('capability_tab_select', { tab: t }); }}
+          >
+            {t}
+          </button>
+        ))}
+      </div>
+
+      {/* Tab 0 — Quality & Manufacturing */}
+      <div
+        id="exp-tabpanel-cap-0"
+        role="tabpanel"
+        aria-labelledby="exp-tab-cap-0"
+        hidden={tab !== 0}
+        className="exp-tab-panel"
+      >
+        <div className="exp-tab-cols">
+          <div className="export-quality-list">
+            <ul className="export-tick-list">
+              {EXP_QUALITY.map((q, i) => (
+                <li key={i}><span aria-hidden="true">›</span><span>{q}</span></li>
+              ))}
+            </ul>
+            <div className="export-inspect-callout" style={{ marginTop: 24 }}>
+              <span className="mono">Inspection</span>
+              <p>We welcome customer inspection, third-party inspection and Factory Acceptance Tests based on agreed project requirements.</p>
+            </div>
+          </div>
+          <div className="export-doc-cards">
+            {EXP_QUALITY_DOCS.map(d => (
+              <div className="export-doc-card2" key={d.code}>
+                <div className="mono num">{d.code}</div>
+                <div>
+                  <h3>{d.title}</h3>
+                  <p>{d.note}</p>
+                </div>
+                <button className="exp-textlink" onClick={() => exportTrack('certificate_download', { doc: d.title })}>
+                  Preview <span aria-hidden="true">→</span>
+                </button>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* Tab 1 — Trade Compliance */}
+      <div
+        id="exp-tabpanel-cap-1"
+        role="tabpanel"
+        aria-labelledby="exp-tab-cap-1"
+        hidden={tab !== 1}
+        className="exp-tab-panel"
+      >
+        <div className="export-status-list exp-status-list-narrow">
+          {EXP_TRADE.map(item => (
+            <div className="export-status-row" key={item.k}>
+              <span>{item.k}</span>
+              <span className={`export-chip ${EXP_STATUS_CHIP[item.s].cls}`}>{EXP_STATUS_CHIP[item.s].label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Tab 2 — ESG & Carbon Readiness */}
+      <div
+        id="exp-tabpanel-cap-2"
+        role="tabpanel"
+        aria-labelledby="exp-tab-cap-2"
+        hidden={tab !== 2}
+        className="exp-tab-panel"
+      >
+        <div className="export-status-list exp-status-list-narrow">
+          {EXP_ESG.map(item => (
+            <div className="export-status-row" key={item.k}>
+              <span>{item.k}</span>
+              <span className={`export-chip ${EXP_STATUS_CHIP[item.s].cls}`}>{EXP_STATUS_CHIP[item.s].label}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ============================================================
+   COMPONENT: Resources — 3 tabs
+   Documentation | Logistics & Incoterms | Warranty & Support
+   ============================================================ */
+function ResourcesTabs() {
+  const [tab, setTab] = React.useState(0);
+  const TABS = ['Documentation', 'Logistics & Incoterms', 'Warranty & Support'];
+
+  return (
+    <div className="exp-tabs-wrap">
+      <div className="exp-tabs" role="tablist" aria-label="Resources">
+        {TABS.map((t, i) => (
+          <button
+            key={i}
+            role="tab"
+            aria-selected={tab === i}
+            aria-controls={`exp-tabpanel-res-${i}`}
+            id={`exp-tab-res-${i}`}
+            className={`exp-tab-btn ${tab === i ? 'is-active' : ''}`}
+            onClick={() => setTab(i)}
+          >
+            {t}
+          </button>
+        ))}
+      </div>
+
+      {/* Tab 0 — Documentation */}
+      <div
+        id="exp-tabpanel-res-0"
+        role="tabpanel"
+        aria-labelledby="exp-tab-res-0"
+        hidden={tab !== 0}
+        className="exp-tab-panel"
+      >
+        <div className="exp-resources-cols">
+          <div>
+            <div className="export-doc-subhead">Standard documents</div>
+            <ul className="export-tick-list">
+              {EXP_DOCS_STD.map((d, i) => (
+                <li key={i}><span aria-hidden="true">›</span><span>{d}</span></li>
+              ))}
+            </ul>
+          </div>
+          <div>
+            <div className="export-doc-subhead">Applicable documents</div>
+            <ul className="export-tick-list">
+              {EXP_DOCS_APP.map((d, i) => (
+                <li key={i}><span aria-hidden="true">›</span><span>{d}</span></li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      {/* Tab 1 — Logistics & Incoterms */}
+      <div
+        id="exp-tabpanel-res-1"
+        role="tabpanel"
+        aria-labelledby="exp-tab-res-1"
+        hidden={tab !== 1}
+        className="exp-tab-panel"
+      >
+        <div className="exp-resources-cols">
+          <div>
+            <div className="export-doc-subhead">Supported Incoterms</div>
+            <div className="export-incoterm-row">
+              {EXP_INCOTERMS.map(t => (
+                <span className="export-incoterm exp-incoterm-light" key={t}>{t}</span>
+              ))}
+            </div>
+            <p className="exp-fineprint">Final Incoterms, payment terms and delivery responsibilities are confirmed in the quotation.</p>
+          </div>
+          <div>
+            <div className="export-doc-subhead">Logistics support</div>
+            <ul className="export-tick-list">
+              {EXP_LOGISTICS2.map((d, i) => (
+                <li key={i}><span aria-hidden="true">›</span><span>{d}</span></li>
+              ))}
+            </ul>
+            <p className="exp-fineprint">Indicative lead time is shared by product family. Fixed dates are confirmed at order.</p>
+          </div>
+        </div>
+      </div>
+
+      {/* Tab 2 — Warranty & Support */}
+      <div
+        id="exp-tabpanel-res-2"
+        role="tabpanel"
+        aria-labelledby="exp-tab-res-2"
+        hidden={tab !== 2}
+        className="exp-tab-panel"
+      >
+        <ul className="export-tick-list">
+          {EXP_AFTERSALES.map((a, i) => (
+            <li key={i}><span aria-hidden="true">›</span><span>{a}</span></li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  );
+}
+
+/* ============================================================
+   PAGE — 10 sections in order
+   ============================================================ */
 function PageExport({ navigate }) {
   useReveal();
 
-  /* scroll-depth analytics */
+  /* scroll-depth analytics — preserved */
   React.useEffect(() => {
     const fired = {};
     function onScroll() {
@@ -61,37 +268,137 @@ function PageExport({ navigate }) {
         </div>
       </section>
 
-      {/* ===== SECTION 2 — SELF-SELECTION ===== */}
+      {/* ===== SECTION 2 — GLOBAL REACH & INDUSTRIES SERVED ===== */}
       <section className="section reveal">
         <div className="container">
           <div className="section-head">
-            <div className="eyebrow"><span className="mono">Global reach, sectors and portfolio</span></div>
+            <div className="eyebrow">
+              <span className="mono">Global reach</span>
+            </div>
             <div>
-              <h2>Find the right export path by region, sector and product group.</h2>
-              <p className="export-sub">Select a region, sector and product group to see the indicative HS heading, rating range, documentation and customisation for your requirement.</p>
+              <h2>Global Reach &amp; Industries Served</h2>
+              <p className="export-sub">Dynalektric supports industrial customers across multiple regions and sectors with engineered products and export coordination.</p>
             </div>
           </div>
-          <ExportSelfSelect navigate={navigate} />
+          <div className="exp-reach-grid">
+            <div className="exp-reach-panel">
+              <div className="exp-reach-title">Regions served</div>
+              <div className="exp-reach-chips">
+                {EXP_REGIONS.map(r => (
+                  <span className="exp-reach-chip" key={r}>{r}</span>
+                ))}
+              </div>
+            </div>
+            <div className="exp-reach-panel">
+              <div className="exp-reach-title">Industries served</div>
+              <div className="exp-reach-chips">
+                {EXP_SECTORS.map(s => (
+                  <span className="exp-reach-chip exp-reach-chip-ind" key={s}>{s}</span>
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* ===== SECTION 3 — TRUST AND VERIFICATION (priority) ===== */}
-      <section className="section reveal export-priority" style={{ background: 'var(--panel-dark)', color: 'var(--on-dark)' }}>
+      {/* ===== SECTION 3 — EXPORT PRODUCT PORTFOLIO ===== */}
+      <section className="section reveal" style={{ background: 'var(--bg-alt)' }}>
         <div className="container">
-          <div className="section-head" style={{ borderColor: 'rgba(255,255,255,0.12)' }}>
-            <div className="eyebrow"><span className="mono" style={{ color: 'rgba(244,244,241,0.6)' }}>Priority · Trust and verification</span></div>
+          <div className="section-head">
+            <div className="eyebrow">
+              <span className="mono">Product portfolio</span>
+            </div>
             <div>
-              <h2 style={{ color: 'var(--on-dark)' }}>Verify Dynalektric as a supplier.</h2>
-              <p className="export-sub" style={{ color: 'rgba(244,244,241,0.72)' }}>Legal identity, independent verification and financial readiness for procurement onboarding. Values shown as placeholders are confirmed with client-approved data.</p>
+              <h2>Export Product Portfolio</h2>
+              <p className="export-sub">Core product groups prepared for international industrial applications.</p>
             </div>
           </div>
 
+          {/* Desktop / tablet table */}
+          <div className="exp-ptable-wrap">
+            <table className="exp-ptable">
+              <thead>
+                <tr>
+                  <th>Product Group</th>
+                  <th>Indicative HS Heading</th>
+                  <th>Rating Range</th>
+                  <th>Documentation</th>
+                  <th>Customisation Capability</th>
+                </tr>
+              </thead>
+              <tbody>
+                {EXP_PORTFOLIO.map(g => (
+                  <tr key={g.id}>
+                    <td className="exp-ptable-group">
+                      <span className="exp-ptable-name">{g.group}</span>
+                      <ul className="exp-ptable-items">
+                        {g.items.map(item => <li key={item}>{item}</li>)}
+                      </ul>
+                    </td>
+                    <td><span className="mono exp-ptable-hs">HS {g.hs}</span></td>
+                    <td>{g.rating}</td>
+                    <td>{g.docs}</td>
+                    <td>{g.custom}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          {/* Mobile stacked cards */}
+          <div className="exp-pmobile">
+            {EXP_PORTFOLIO.map(g => (
+              <div className="exp-pmobile-card" key={g.id}>
+                <div className="exp-pmobile-head">
+                  <span className="exp-ptable-name">{g.group}</span>
+                  <span className="mono exp-ptable-hs">HS {g.hs}</span>
+                </div>
+                <ul className="exp-ptable-items exp-pmobile-items">
+                  {g.items.map(item => <li key={item}>{item}</li>)}
+                </ul>
+                <div className="exp-pmobile-meta">
+                  <div className="exp-pmobile-row">
+                    <span className="exp-pmobile-k">Rating range</span>
+                    <span className="exp-pmobile-v">{g.rating}</span>
+                  </div>
+                  <div className="exp-pmobile-row">
+                    <span className="exp-pmobile-k">Documentation</span>
+                    <span className="exp-pmobile-v">{g.docs}</span>
+                  </div>
+                  <div className="exp-pmobile-row">
+                    <span className="exp-pmobile-k">Customisation</span>
+                    <span className="exp-pmobile-v">{g.custom}</span>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <p className="exp-fineprint">Indicative HS headings are confirmed per product and destination. Final classification is set at quotation.</p>
+        </div>
+      </section>
+
+      {/* ===== SECTION 4 — TRUST & VERIFICATION ===== */}
+      <section className="section reveal" style={{ background: 'var(--panel-dark)', color: 'var(--on-dark)' }}>
+        <div className="container">
+          <div className="section-head" style={{ borderColor: 'rgba(255,255,255,0.12)' }}>
+            <div className="eyebrow">
+              <span className="mono" style={{ color: 'rgba(244,244,241,0.6)' }}>Trust and verification</span>
+            </div>
+            <div>
+              <h2 style={{ color: 'var(--on-dark)' }}>Trust &amp; Verification</h2>
+              <p className="export-sub" style={{ color: 'rgba(244,244,241,0.72)' }}>Legal identity, independent verification and financial readiness for procurement onboarding. Values shown as placeholders are confirmed with client-approved data.</p>
+            </div>
+          </div>
           <div className="export-verify-grid">
             <div className="export-verify-panel">
               <div className="mono export-verify-title">Legal identity</div>
               <div className="exp-spec-rows on-dark">
                 {EXP_LEGAL.map(f => (
-                  <div className="exp-spec-row" key={f.k}><span className="exp-label">{f.k}</span><span className="exp-spec-val">{f.v}</span></div>
+                  <div className="exp-spec-row" key={f.k}>
+                    <span className="exp-label">{f.k}</span>
+                    <span className="exp-spec-val">{f.v}</span>
+                  </div>
                 ))}
               </div>
               <div className="export-map" aria-label="Registered address map placeholder">
@@ -103,7 +410,10 @@ function PageExport({ navigate }) {
                 <div className="mono export-verify-title">Financial readiness</div>
                 <div className="exp-spec-rows on-dark">
                   {EXP_FINANCIAL.map(f => (
-                    <div className="exp-spec-row" key={f.k}><span className="exp-label">{f.k}</span><span className="exp-spec-val">{f.v}</span></div>
+                    <div className="exp-spec-row" key={f.k}>
+                      <span className="exp-label">{f.k}</span>
+                      <span className="exp-spec-val">{f.v}</span>
+                    </div>
                   ))}
                 </div>
               </div>
@@ -115,22 +425,30 @@ function PageExport({ navigate }) {
                 </div>
               </div>
               <div className="export-verify-actions">
-                <button className="btn btn-primary" onClick={() => exportTrack('company_verification_download')}>Download Company Verification Pack <span className="arrow" aria-hidden="true">→</span></button>
-                <button className="btn btn-ghost on-dark" onClick={() => exportTrack('clearance_scheme_view', { action: 'view_address' })}>View Registered Address</button>
-                <button className="btn btn-ghost on-dark" onClick={() => { exportTrack('supplier_qualification_click'); navigate('contact'); }}>Submit Supplier Qualification Request</button>
+                <button className="btn btn-primary" onClick={() => exportTrack('company_verification_download')}>
+                  Download Company Verification Pack <span className="arrow" aria-hidden="true">→</span>
+                </button>
+                <button className="btn btn-ghost on-dark" onClick={() => exportTrack('clearance_scheme_view', { action: 'view_address' })}>
+                  View Registered Address
+                </button>
+                <button className="btn btn-ghost on-dark" onClick={() => { exportTrack('supplier_qualification_click'); navigate('contact'); }}>
+                  Submit Supplier Qualification Request
+                </button>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ===== SECTION 4 — CERTIFICATIONS MATRIX (priority) ===== */}
-      <section className="section reveal export-priority" style={{ background: 'var(--bg-alt)' }}>
+      {/* ===== SECTION 5 — CERTIFICATIONS MATRIX ===== */}
+      <section className="section reveal" style={{ background: 'var(--bg-alt)' }}>
         <div className="container">
           <div className="section-head">
-            <div className="eyebrow"><span className="mono">Priority · Certifications and standards</span></div>
+            <div className="eyebrow">
+              <span className="mono">Certifications and standards</span>
+            </div>
             <div>
-              <h2>Certifications and standards by product and market.</h2>
+              <h2>Certifications and Standards</h2>
               <p className="export-sub">A three-status view across management systems and product or market standards. Status reflects current position and is confirmed with certificate references on request.</p>
             </div>
           </div>
@@ -138,13 +456,15 @@ function PageExport({ navigate }) {
         </div>
       </section>
 
-      {/* ===== SECTION 5 — DESTINATION-MARKET CLEARANCE (priority) ===== */}
-      <section className="section reveal export-priority">
+      {/* ===== SECTION 6 — DESTINATION MARKET CLEARANCE SCHEMES ===== */}
+      <section className="section reveal">
         <div className="container">
           <div className="section-head">
-            <div className="eyebrow"><span className="mono">Priority · Destination-market clearance</span></div>
+            <div className="eyebrow">
+              <span className="mono">Destination-market clearance</span>
+            </div>
             <div>
-              <h2>Destination-market clearance guidance.</h2>
+              <h2>Destination Market Clearance Schemes</h2>
               <p className="export-sub">Select a destination country and product group to view a likely compliance path. Schemes shown are indicative and confirmed per product and order.</p>
             </div>
           </div>
@@ -158,91 +478,35 @@ function PageExport({ navigate }) {
         </div>
       </section>
 
-      {/* ===== SECTION 6 — QUALITY, MANUFACTURING, INSPECTION ===== */}
+      {/* ===== SECTION 7 — EXPORT CAPABILITY OVERVIEW ===== */}
       <section className="section reveal" style={{ background: 'var(--bg-alt)' }}>
         <div className="container">
           <div className="section-head">
-            <div className="eyebrow"><span className="mono">Quality and inspection readiness</span></div>
+            <div className="eyebrow">
+              <span className="mono">Capability overview</span>
+            </div>
             <div>
-              <h2>Engineering, quality and inspection readiness.</h2>
-              <p className="export-sub">In-house engineering and documented quality discipline, built around your inspection plan and qualification programme.</p>
+              <h2>Export Capability Overview</h2>
+              <p className="export-sub">Structured quality systems, trade compliance processes and sustainability readiness support international customer requirements.</p>
             </div>
           </div>
-          <div className="export-quality-grid">
-            <div className="export-quality-list">
-              <ul className="export-tick-list">
-                {EXP_QUALITY.map((q, i) => <li key={i}><span aria-hidden="true">›</span><span>{q}</span></li>)}
-              </ul>
-              <div className="export-inspect-callout">
-                <span className="mono">Inspection</span>
-                <p>We welcome customer inspection, third-party inspection and Factory Acceptance Tests based on agreed project requirements.</p>
-              </div>
-            </div>
-            <div className="export-doc-cards">
-              {EXP_QUALITY_DOCS.map(d => (
-                <div className="export-doc-card2" key={d.code}>
-                  <div className="mono num">{d.code}</div>
-                  <div>
-                    <h3>{d.title}</h3>
-                    <p>{d.note}</p>
-                  </div>
-                  <button className="exp-textlink" onClick={() => exportTrack('certificate_download', { doc: d.title })}>Preview <span aria-hidden="true">→</span></button>
-                </div>
-              ))}
-            </div>
-          </div>
+          <ExportCapabilityTabs />
         </div>
       </section>
 
-      {/* ===== SECTION 7 — TRADE COMPLIANCE, ESG, IP ===== */}
-      <section className="section reveal">
-        <div className="container">
-          <div className="section-head">
-            <div className="eyebrow"><span className="mono">Trade compliance, ESG and IP</span></div>
-            <div>
-              <h2>Trade compliance, ESG and IP protection.</h2>
-              <p className="export-sub">Screening, review and protection processes with clear status indicators. Items shown as under review or based on requirement are confirmed per order.</p>
-            </div>
-          </div>
-          <div className="export-compliance-grid">
-            <div className="export-compliance-col">
-              <h3 className="export-col-title">Trade compliance and IP</h3>
-              <div className="export-status-list">
-                {EXP_TRADE.map(item => (
-                  <div className="export-status-row" key={item.k}>
-                    <span>{item.k}</span>
-                    <span className={`export-chip ${EXP_STATUS_CHIP[item.s].cls}`}>{EXP_STATUS_CHIP[item.s].label}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="export-compliance-col">
-              <h3 className="export-col-title">ESG readiness</h3>
-              <div className="export-status-list">
-                {EXP_ESG.map(item => (
-                  <div className="export-status-row" key={item.k}>
-                    <span>{item.k}</span>
-                    <span className={`export-chip ${EXP_STATUS_CHIP[item.s].cls}`}>{EXP_STATUS_CHIP[item.s].label}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ===== SECTION 8 — PROCESS, DOCS, LOGISTICS ===== */}
+      {/* ===== SECTION 8 — EXPORT PROCESS TIMELINE ===== */}
       <section className="section reveal" style={{ background: 'var(--panel-dark)', color: 'var(--on-dark)' }}>
         <div className="container">
           <div className="section-head" style={{ borderColor: 'rgba(255,255,255,0.12)' }}>
-            <div className="eyebrow"><span className="mono" style={{ color: 'rgba(244,244,241,0.6)' }}>From RFQ to delivery</span></div>
+            <div className="eyebrow">
+              <span className="mono" style={{ color: 'rgba(244,244,241,0.6)' }}>From RFQ to delivery</span>
+            </div>
             <div>
-              <h2 style={{ color: 'var(--on-dark)' }}>From RFQ to delivery.</h2>
-              <p className="export-sub" style={{ color: 'rgba(244,244,241,0.72)' }}>A structured export workflow with confirmed Incoterms, documentation and logistics support.</p>
+              <h2 style={{ color: 'var(--on-dark)' }}>Export Process Timeline</h2>
+              <p className="export-sub" style={{ color: 'rgba(244,244,241,0.72)' }}>A structured export workflow from initial enquiry through delivery and after-sales.</p>
             </div>
           </div>
-
-          <ol className="export-timeline">
+          <ol className="export-timeline export-timeline-8" aria-label="Export process steps">
             {EXP_PROCESS.map(s => (
               <li className="export-timeline-step" key={s.n}>
                 <span className="export-timeline-num mono">{s.n}</span>
@@ -250,72 +514,37 @@ function PageExport({ navigate }) {
               </li>
             ))}
           </ol>
-
-          <div className="export-trade-grid">
-            <div className="export-trade-card">
-              <div className="mono export-verify-title">Incoterms</div>
-              <div className="export-incoterm-row">
-                {EXP_INCOTERMS.map(t => <span className="export-incoterm" key={t}>{t}</span>)}
-              </div>
-              <p className="export-verify-p">Final Incoterms, payment terms and delivery responsibilities are confirmed in the quotation.</p>
-            </div>
-            <div className="export-trade-card">
-              <div className="mono export-verify-title">Documentation provided</div>
-              <div className="export-doc-cols">
-                <div>
-                  <div className="export-doc-subhead">Standard</div>
-                  <ul className="export-tick-list on-dark">
-                    {EXP_DOCS_STD.map((d, i) => <li key={i}><span aria-hidden="true">›</span><span>{d}</span></li>)}
-                  </ul>
-                </div>
-                <div>
-                  <div className="export-doc-subhead">Where applicable</div>
-                  <ul className="export-tick-list on-dark">
-                    {EXP_DOCS_APP.map((d, i) => <li key={i}><span aria-hidden="true">›</span><span>{d}</span></li>)}
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div className="export-trade-card">
-              <div className="mono export-verify-title">Logistics support</div>
-              <ul className="export-tick-list on-dark">
-                {EXP_LOGISTICS2.map((d, i) => <li key={i}><span aria-hidden="true">›</span><span>{d}</span></li>)}
-              </ul>
-              <p className="export-verify-p">Indicative lead time is shared by product family. Fixed dates are confirmed at order.</p>
-            </div>
-          </div>
         </div>
       </section>
 
-      {/* ===== SECTION 9 — AFTER-SALES, FAQ, EXPORT RFQ ===== */}
-      <section className="section reveal" style={{ paddingBottom: 'calc(var(--section-y) * 1.1)' }}>
+      {/* ===== SECTION 9 — RESOURCES ===== */}
+      <section className="section reveal">
         <div className="container">
           <div className="section-head">
-            <div className="eyebrow"><span className="mono">Start an export RFQ</span></div>
+            <div className="eyebrow">
+              <span className="mono">Documentation, logistics and support</span>
+            </div>
             <div>
-              <h2>Start an export RFQ.</h2>
-              <p className="export-sub">A short multi-step enquiry. After-sales terms and common questions are below.</p>
+              <h2>Resources</h2>
+              <p className="export-sub">Documentation packages, Incoterms, logistics support and after-sales terms for international orders.</p>
             </div>
           </div>
+          <ResourcesTabs />
+        </div>
+      </section>
 
-          <div className="export-final-grid">
-            <div className="export-rfq-wrap">
-              <ExportRfq />
+      {/* ===== SECTION 10 — FAQ ===== */}
+      <section className="section reveal" style={{ background: 'var(--bg-alt)' }}>
+        <div className="container">
+          <div className="section-head">
+            <div className="eyebrow">
+              <span className="mono">Common questions</span>
             </div>
-            <div className="export-final-side">
-              <div className="export-aftersales">
-                <div className="mono export-verify-title">After-sales</div>
-                <ul className="export-tick-list">
-                  {EXP_AFTERSALES.map((a, i) => <li key={i}><span aria-hidden="true">›</span><span>{a}</span></li>)}
-                </ul>
-              </div>
+            <div>
+              <h2>Frequently Asked Questions</h2>
             </div>
           </div>
-
-          <div className="export-faq-block">
-            <h3 className="export-faq-title">Frequently asked questions</h3>
-            <ExportFaq />
-          </div>
+          <ExportFaq />
         </div>
       </section>
 
