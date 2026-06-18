@@ -182,9 +182,10 @@ p { color: var(--ink-soft); text-wrap: pretty; font-size: clamp(1rem, 1.1vw, 1.0
   text-decoration: none;
   white-space: nowrap;
 }
-.topbar-cta .btn{
-    padding:12px 20px;
-    font-size:15px;
+.topbar-cta .btn {
+  padding: 12px 16px;
+  font-size: 14px;
+  gap: 8px;
 }
 .btn-primary {
   background: var(--accent);
@@ -230,22 +231,23 @@ p { color: var(--ink-soft); text-wrap: pretty; font-size: clamp(1rem, 1.1vw, 1.0
   background: rgba(245,247,250,0.85);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--rule-soft);
+  border-bottom: 1px solid var(--rule);
 }
 .topbar-inner {
   display: grid;
   grid-template-columns: auto 1fr auto;
   align-items: center;
-  gap: 18px;
-  padding: 28px var(--gutter);
-  max-width: var(--container-max);
+  gap: 32px;
+  /* Fluid gutter: shrinks at laptop widths to give nav room, independent of --gutter */
+  padding: 28px clamp(36px, 3.5vw, 64px);
+  max-width: 1800px;
   margin: 0 auto;
 }
 .topbar-logo { display: flex; align-items: center; flex: 0 0 auto; }
 .topbar-logo img { width: 100%; height: auto; display: block; object-fit: contain; }
 .topbar-nav {
   display: flex;
-  gap: 2px;
+  gap: 16px;
   justify-content: center;
 }
 .nav-link {
@@ -257,7 +259,7 @@ p { color: var(--ink-soft); text-wrap: pretty; font-size: clamp(1rem, 1.1vw, 1.0
   line-height: 1.2;
   letter-spacing: 0;
   color: var(--ink-muted);
-  padding: 8px 3px;
+  padding: 8px 5px;
   border-radius: var(--radius);
   cursor: pointer;
   transition: color 150ms;
@@ -271,24 +273,25 @@ p { color: var(--ink-soft); text-wrap: pretty; font-size: clamp(1rem, 1.1vw, 1.0
 .nav-link[aria-current="page"]::after {
   content: '';
   position: absolute;
-  left: 14px; right: 14px; bottom: 2px;
+  left: 5px; right: 5px; bottom: 0;
   height: 2px;
   background: var(--red);
+  border-radius: 1px;
 }
 .topbar-cta {
   display: flex;
-  gap: 12px;
+  gap: 20px;
   align-items: center;
-  margin-left: 10px;
+  margin-left: 30px;
 }
 .topbar-meta { font-family: var(--font-mono); font-size: 11px; color: var(--ink-muted); letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap; }
 
 @media (min-width: 1440px) {
-  .topbar-logo { width: 320px; }
+  .topbar-logo { width: 350px; }
 }
 
 @media (min-width: 1024px) and (max-width: 1439px) {
-  .topbar-logo { width: 220px; }
+  .topbar-logo { width: 244px; }
 }
 @media (min-width: 768px) and (max-width: 1023px) {
   .topbar-logo { width: 165px; }
@@ -361,15 +364,24 @@ p { color: var(--ink-soft); text-wrap: pretty; font-size: clamp(1rem, 1.1vw, 1.0
   color: var(--on-dark);
   padding: 72px 0 32px;
   margin-top: var(--section-y);
-  /* Two-tone separator: grey from left edge to the logo column area (~40%), then brand red */
-  border-top: 4px solid transparent;
-  border-image: linear-gradient(
-    to right,
-    #64748B 0%,
-    #64748B 40%,
-    var(--red) 42%,
-    var(--red) 100%
-  ) 1;
+  position: relative;
+}
+/* Layered top edge: 1px neutral gray, 1px gap, 2px red accent — flush with footer top */
+.footer::before,
+.footer::after {
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+}
+.footer::before {
+  top: 0;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.3);
+}
+.footer::after {
+  top: 1px;
+  height: 2px;
+  background: var(--red);
 }
 .footer h4 { color: var(--on-dark); font-size: 13px; font-family: var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; opacity: 0.8; margin-bottom: 20px; }
 .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 56px; border-bottom: 1px solid rgba(193,18,31,0.3); }
@@ -384,8 +396,9 @@ p { color: var(--ink-soft); text-wrap: pretty; font-size: clamp(1rem, 1.1vw, 1.0
 @media (max-width: 800px) {
   .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
   .footer-bottom { flex-direction: column; gap: 12px; align-items: flex-start; }
-  /* Collapse to all-red on narrow screens where logo column shifts */
-  .footer { border-image: none; border-top-color: var(--red); }
+  /* On narrow screens collapse to a single red line */
+  .footer::before { display: none; }
+  .footer::after { top: 0; height: 2px; }
 }
 .contact-map{
     overflow: hidden;

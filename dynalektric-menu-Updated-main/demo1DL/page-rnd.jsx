@@ -73,7 +73,8 @@ function PageRnd({ navigate }) {
             {FOCUS_AREAS.map(f => (
               <div className="cap-card reveal" key={f.num}>
                 <div>
-                  <div className="num">{f.num} / FOCUS AREA</div>
+                  <div className="num">{f.num}</div>
+                  <div className="mono" style={{ fontSize: 10, letterSpacing: '0.12em', color: 'var(--ink-muted)', marginBottom: 16, textTransform: 'uppercase' }}>Focus Area</div>
                   <h3>{f.title}</h3>
                   <p className="reveal-body">{f.body}</p>
                   <ul className="reveal-body focus-deliverables">
@@ -104,7 +105,6 @@ function PageRnd({ navigate }) {
                 <div className="num">{s.num}</div>
                 <h4>{s.title}</h4>
                 <p>{s.body}</p>
-                <div className="mono" style={{ marginTop: 'auto', color: 'var(--ink-muted)', paddingTop: 24 }}>Step {s.num} of 05</div>
               </div>
             ))}
           </div>

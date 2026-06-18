@@ -57,17 +57,17 @@ function PageAbout({ navigate }) {
           <div className="mono" style={{ color: 'rgba(244,244,241,0.6)', marginBottom: 40, textAlign: 'center' }}>By the numbers</div>
           <div className="about-stats">
             <div style={{ textAlign: 'center' }}>
-              <div className="big-num" style={{ marginBottom: 16 }}><Counter to={40} />+</div>
+              <div className="big-num" style={{ marginBottom: 16, color: '#ffffff' }}><Counter to={40} />+</div>
               <div className="mono" style={{ color: 'rgba(244,244,241,0.6)', marginBottom: 8 }}>Years</div>
               <p style={{ fontSize: 14, color: 'rgba(244,244,241,0.75)' }}>Of in-house engineering and manufacturing</p>
             </div>
             <div style={{ textAlign: 'center' }}>
-              <div className="big-num" style={{ marginBottom: 16 }}><Counter to={500} />+</div>
+              <div className="big-num" style={{ marginBottom: 16, color: '#ffffff' }}><Counter to={500} />+</div>
               <div className="mono" style={{ color: 'rgba(244,244,241,0.6)', marginBottom: 8 }}>Designs</div>
               <p style={{ fontSize: 14, color: 'rgba(244,244,241,0.75)' }}>Custom solutions delivered to specification</p>
             </div>
             <div style={{ textAlign: 'center' }}>
-              <div className="big-num" style={{ marginBottom: 16 }}><Counter to={15} />+</div>
+              <div className="big-num" style={{ marginBottom: 16, color: '#ffffff' }}><Counter to={15} />+</div>
               <div className="mono" style={{ color: 'rgba(244,244,241,0.6)', marginBottom: 8 }}>Markets</div>
               <p style={{ fontSize: 14, color: 'rgba(244,244,241,0.75)' }}>Export destinations across three continents</p>
             </div>

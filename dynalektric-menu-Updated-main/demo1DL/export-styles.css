@@ -977,3 +977,233 @@
   .exp-ptable-wrap { display: none; }
   .exp-pmobile { display: flex; flex-direction: column; gap: 12px; }
 }
+
+/* ============================================================
+   Export Process Roadmap — 4-phase compact grid
+   ============================================================ */
+.exp-roadmap {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+}
+
+.exp-phase {
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--rule);
+}
+.exp-phase:last-child { border-right: none; }
+
+.exp-phase-hd {
+  padding: 16px 20px;
+  background: var(--bg-alt);
+  border-bottom: 1px solid var(--rule);
+  border-top: 3px solid var(--red);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.exp-phase-num {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--red);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.exp-phase-name {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+
+.exp-phase-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  flex: 1;
+  background: var(--bg-card);
+}
+
+.exp-phase-step {
+  padding: 16px 0;
+  border-bottom: 1px solid var(--rule-soft);
+}
+.exp-phase-step:first-child { padding-top: 0; }
+.exp-phase-step:last-child { border-bottom: none; padding-bottom: 0; }
+
+.exp-step-hd {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.exp-step-n {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--red);
+  letter-spacing: 0.1em;
+  flex-shrink: 0;
+}
+
+.exp-step-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.3;
+  letter-spacing: -0.005em;
+}
+
+.exp-step-desc {
+  font-size: 12px;
+  color: var(--ink-soft);
+  line-height: 1.55;
+  margin: 0 0 8px;
+}
+
+.exp-step-items {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.exp-step-items li {
+  display: flex;
+  gap: 6px;
+  align-items: baseline;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--ink-muted);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.exp-step-items li::before {
+  content: '›';
+  color: var(--accent);
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* 2-column at tablet */
+@media (max-width: 960px) {
+  .exp-roadmap { grid-template-columns: repeat(2, 1fr); }
+  .exp-phase:nth-child(2) { border-right: none; }
+  .exp-phase:nth-child(3) { border-top: 1px solid var(--rule); border-right: 1px solid var(--rule); }
+  .exp-phase:nth-child(4) { border-top: 1px solid var(--rule); border-right: none; }
+}
+
+/* Single column on mobile */
+@media (max-width: 560px) {
+  .exp-roadmap { grid-template-columns: 1fr; border-radius: 0; }
+  .exp-phase { border-right: none; border-bottom: 1px solid var(--rule); }
+  .exp-phase:last-child { border-bottom: none; }
+  .exp-phase:nth-child(3),
+  .exp-phase:nth-child(4) { border-top: none; }
+}
+
+/* ============================================================
+   EXPORT PAGE — RESPONSIVE REFINEMENTS
+   Targeted tablet / mobile improvements. Desktop unchanged.
+   ============================================================ */
+
+/* ===== 1. Destination Market Clearance Schemes ===== */
+
+/* Result card: tighter padding at tablet */
+@media (max-width: 1100px) {
+  .exp-clear-result { padding: 24px; }
+}
+
+/* Compact on small tablet / large mobile */
+@media (max-width: 640px) {
+  .exp-clear-controls { gap: 20px; }
+  .exp-clear-field { gap: 10px; }
+  .exp-clear-result { padding: 20px; }
+  .exp-clear-result-head h3 { font-size: 18px; }
+  .exp-clear-steps { gap: 10px; margin-top: 16px; }
+  .exp-clear-steps li { font-size: 14px; gap: 10px; }
+  .export-testing-note { padding: 18px 20px; margin-top: 16px; }
+}
+
+/* Further compact on phone */
+@media (max-width: 480px) {
+  .exp-clear-result { padding: 16px; }
+  .exp-clear-steps li { font-size: 13px; }
+  .export-testing-note { padding: 16px; }
+}
+
+/* ===== Chip buttons: adequate touch targets on mobile ===== */
+@media (max-width: 640px) {
+  .exp-chip { padding: 12px 14px; }
+  .exp-chip-row { gap: 6px; }
+}
+
+/* ===== 2 & 3. Capability Overview + Resources Tabs ===== */
+/* ≤ 600 px: convert horizontal scrolling tabs → stacked
+   vertical list with left-border active indicator.
+   Both ExportCapabilityTabs and ResourcesTabs share these
+   classes so one CSS block handles both. */
+
+@media (max-width: 600px) {
+  .exp-tabs {
+    flex-direction: column;
+    overflow-x: visible;
+  }
+  /* Left-border indicator replaces bottom underline */
+  .exp-tab-btn {
+    white-space: normal;
+    text-align: left;
+    padding: 14px 20px;
+    font-size: 13px;
+    border-bottom: 1px solid var(--rule-soft);
+    border-left: 3px solid transparent;
+    margin-bottom: 0;
+  }
+  .exp-tab-btn:last-child {
+    border-bottom: none;
+  }
+  .exp-tab-btn.is-active {
+    border-left: 3px solid var(--accent);
+    border-bottom-color: var(--rule-soft);
+    background: var(--bg-alt);
+  }
+  .exp-tab-panel { padding: 18px 16px; }
+}
+
+/* ===== 4. Trade Compliance / ESG rows — wrapping on phone ===== */
+/* Allow status chip to wrap below the label on very narrow screens */
+@media (max-width: 480px) {
+  .export-status-row {
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 12px 0;
+    font-size: 14px;
+  }
+  .export-status-row > span:first-child { flex: 1 1 100%; }
+}
+
+/* ===== 5. Quality tab — doc cards: stack on phone ===== */
+@media (max-width: 520px) {
+  .export-doc-card2 {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 16px 18px;
+  }
+  .export-doc-card2 h3 { font-size: 15px; }
+}
+
+/* ===== 6. General mobile compactness ===== */
+@media (max-width: 640px) {
+  .exp-select-result { padding: 22px 20px; }
+  .exp-select-controls { gap: 20px; }
+  .exp-select-field { gap: 10px; }
+  .exp-status-list-narrow { max-width: none; }
+}

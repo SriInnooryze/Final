@@ -754,7 +754,7 @@ function Footer() {
       <div className="container">
         <div className="footer-grid">
           <div className="footer-col">
-            <img className="footer-logo" src={(window.__resources && window.__resources.dynaLogoReversed) || "assets/dynalektric-logo-reversed.png"} alt="Dynalektric logo" width="350" height="160" loading="lazy" />
+            <img className="footer-logo" src={(window.__resources && window.__resources.dynaLogoReversed) || "assets/dynalektric-logo-reversed2.png"} alt="Dynalektric logo" width="320" height="200" loading="lazy" />
             <p className="footer-tag">Magnetics, control panels, power electronics and cross-segment components. Engineered in India for industrial, power, railway, renewable and material handling applications worldwide.</p>
           </div>
           <div className="footer-col">

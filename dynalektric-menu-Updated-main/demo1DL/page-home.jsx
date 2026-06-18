@@ -877,19 +877,21 @@ function PageHome({ navigate, tweaks }) {
             </div>
           </div>
 
-          <div className="stats-row" style={{ marginTop: 56 }}>
-            {STATS.map((s, i) => (
-              <div className="stats-item reveal" key={i} style={{ transitionDelay: `${i * 80}ms`, textAlign: 'center' }}>
-                <div className="big-num">
-                  {s.value.includes('+')
-                    ? <><Counter to={parseInt(s.value)} />+</>
-                    : s.value
-                  }
+          <div style={{ background: 'var(--panel-dark)', borderRadius: 'var(--radius-card)', padding: '48px 40px', marginTop: 56 }}>
+            <div className="stats-row">
+              {STATS.map((s, i) => (
+                <div className="stats-item reveal" key={i} style={{ transitionDelay: `${i * 80}ms`, textAlign: 'center' }}>
+                  <div className="big-num" style={{ color: '#ffffff' }}>
+                    {s.value.includes('+')
+                      ? <><Counter to={parseInt(s.value)} />+</>
+                      : s.value
+                    }
+                  </div>
+                  <div className="mono" style={{ marginTop: 12, color: 'rgba(244,244,241,0.55)' }}>{s.sub}</div>
+                  <div style={{ fontSize: 14, color: 'rgba(244,244,241,0.75)', marginTop: 8 }}>{s.label}</div>
                 </div>
-                <div className="mono" style={{ marginTop: 12, color: 'var(--ink-muted)' }}>{s.sub}</div>
-                <div style={{ fontSize: 14, color: 'var(--ink-soft)', marginTop: 8 }}>{s.label}</div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>

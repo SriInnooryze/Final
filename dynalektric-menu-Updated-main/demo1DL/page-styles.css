@@ -317,7 +317,7 @@
   flex-direction: column;
   gap: 8px;
 }
-.org-proof-item .num { color: var(--red); font-weight: 600; font-size: 13px; letter-spacing: 0.04em; }
+.org-proof-item .num { color: var(--ink); font-weight: 600; font-size: 13px; letter-spacing: 0.04em; }
 .org-proof-label { font-size: 13px; color: var(--ink-soft); line-height: 1.45; }
 @media (max-width: 900px) {
   .org-split { grid-template-columns: 1fr; gap: 36px; }
@@ -1074,6 +1074,9 @@
 .indstage-allbtn {
   color: #fff;
   border-color: rgba(255,255,255,0.3);
+  padding: 16px 32px;
+  gap: 14px;
+  letter-spacing: 0.01em;
 }
 .indstage-allbtn:hover { color: #fff; border-color: var(--accent); background: var(--accent); }
 
@@ -1576,7 +1579,7 @@
   position: sticky; top: 96px;
   box-shadow: var(--shadow-card);
 }
-.industry-detail .num { font-family: var(--font-mono); color: var(--red); margin-bottom: 16px; font-size: 11px; letter-spacing: 0.1em; font-weight: 600; }
+.industry-detail .num { font-family: var(--font-mono); color: var(--ink-muted); margin-bottom: 16px; font-size: 11px; letter-spacing: 0.1em; font-weight: 600; }
 .industry-detail h3 { margin-bottom: 16px; font-size: 22px; }
 .industry-detail p { margin-top: 12px; font-size: 14px; line-height: 1.6; }
 .industry-detail .apps { display: flex; flex-direction: column; gap: 1px; background: var(--rule-soft); margin-top: 28px; border: 1px solid var(--rule-soft); }
@@ -1788,12 +1791,13 @@
   gap: 16px;
 }
 .process-step .num {
-  font-family: var(--font-display);
-  font-size: 40px;
-  font-weight: 350;
-  letter-spacing: -0.03em;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
   line-height: 1;
   color: var(--red);
+  margin-bottom: 4px;
 }
 .process-step h4 { font-size: 16px; }
 .process-step p { font-size: 13px; }
@@ -2621,14 +2625,61 @@
    Global overflow guard
    ============================================================ */
 html, body { overflow-x: clip; }
-.container { max-width: var(--container-max); margin: 0 auto; padding: 0 var(--gutter); box-sizing: border-box; }
-@media (max-width: 600px) {
-  .container { padding: 0 var(--gutter); }
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+  box-sizing: border-box;
 }
 /* Block any rogue image from causing overflow */
 img, video, svg, image-slot { max-width: 100%; }
 /* All section children get safe min-width on grid items */
 .section, .page-hero, main { min-width: 0; }
+
+/* Desktop responsiveness: topbar nav flex-shrink guard */
+@media (min-width: 1081px) {
+  .topbar-nav { flex-shrink: 1; min-width: 0; }
+  .topbar-logo { flex-shrink: 0; }
+  .topbar-cta { flex-shrink: 0; }
+}
+
+/* Industry stage: tighten rail column at mid-desktop widths */
+@media (min-width: 1081px) and (max-width: 1200px) {
+  .indstage { grid-template-columns: 1fr 280px; gap: 24px; }
+}
+
+/* Product explorer rail: constrain at mid-desktop */
+@media (min-width: 1101px) and (max-width: 1300px) {
+  .prodx-layout { grid-template-columns: minmax(200px, 240px) minmax(0, 1fr); gap: 32px; }
+}
+
+/* Prevent prodx-detail-head fixed 350px column from overflowing */
+@media (max-width: 1200px) {
+  .prodx-detail-head[style] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Standards + QA grid tighten on mid-desktop */
+@media (min-width: 901px) and (max-width: 1100px) {
+  .standards-grid { grid-template-columns: 1.4fr 1fr; gap: 32px; }
+}
+
+/* R&D custom engineering grid on mid-desktop */
+@media (min-width: 901px) and (max-width: 1100px) {
+  .rnd-teaser { gap: 48px; }
+}
+
+/* Footer grid: prevent overflow at 900-1100px */
+@media (min-width: 801px) and (max-width: 1100px) {
+  .footer-grid { grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 32px; }
+}
+
+/* Cert row: 3 columns at mid-range to prevent overflow */
+@media (min-width: 601px) and (max-width: 900px) {
+  .cert-row { grid-template-columns: repeat(3, 1fr); }
+}
 
 /* ============================================================
    Products explorer (v3) — left rail + main column
@@ -2771,7 +2822,7 @@ img, video, svg, image-slot { max-width: 100%; }
   font-size: 72px;
   font-weight: 300;
   letter-spacing: -0.04em;
-  color: var(--red);
+  color: var(--rule);
   line-height: 0.9;
 }
 .prodx-group-meta h2 {
@@ -3140,5 +3191,125 @@ img, video, svg, image-slot { max-width: 100%; }
   }
   .page-hero-visual {
     aspect-ratio: 16 / 9;
+  }
+}
+
+/* ============================================================
+   Products — selected sub-category detail image wrapper
+   Provides explicit container dimensions so the image is always
+   visible on mobile even when the source file is missing.
+   ============================================================ */
+.prodx-detail-img-wrap {
+  aspect-ratio: 4 / 3;
+  background: var(--bg-card);
+  border: 1px solid var(--rule);
+  overflow: hidden;
+  border-radius: 8px;
+}
+.prodx-detail-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Products — group overview image: ensure no collapse on mobile */
+@media (max-width: 1100px) {
+  .prodx-group-image {
+    width: 100%;
+    min-height: 200px;
+  }
+}
+
+/* ============================================================
+   Industries — matrix table: horizontal scroll on narrow screens
+   ============================================================ */
+.matrix-table-wrap {
+  min-width: 0;
+}
+@media (max-width: 760px) {
+  .matrix-table-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 4px;
+  }
+  .matrix-table,
+  .matrix-table.matrix-4col {
+    min-width: 440px;
+  }
+}
+
+/* ============================================================
+   Industries — selected industry detail card: compact on mobile
+   ============================================================ */
+@media (max-width: 1100px) {
+  .industry-detail {
+    padding: 28px 24px;
+  }
+  .industry-detail h3 {
+    font-size: 19px;
+  }
+  .industry-detail p {
+    margin-top: 8px;
+  }
+  .industry-detail .apps-label {
+    margin-top: 16px;
+    margin-bottom: 8px;
+  }
+  .industry-detail .apps {
+    margin-top: 10px;
+  }
+  .industry-detail .apps li {
+    padding: 10px 12px;
+  }
+}
+@media (max-width: 640px) {
+  .industry-detail {
+    padding: 20px 16px;
+  }
+  .industry-detail h3 {
+    font-size: 17px;
+    margin-bottom: 10px;
+  }
+  .industry-detail .apps-label {
+    margin-top: 12px;
+    margin-bottom: 6px;
+  }
+  .industry-detail .apps li {
+    padding: 8px 10px;
+    font-size: 12px;
+  }
+  .industry-detail p {
+    font-size: 13px;
+    line-height: 1.55;
+  }
+  .industry-detail > div[style] {
+    gap: 6px;
+  }
+}
+
+/* ============================================================
+   Industries — detailed industry cards: tighter on mobile
+   ============================================================ */
+@media (max-width: 760px) {
+  .industry-card {
+    padding: 28px 20px;
+    gap: 16px;
+  }
+  .industry-card .apps li {
+    padding: 10px 12px;
+  }
+}
+@media (max-width: 480px) {
+  .industry-card {
+    padding: 20px 16px;
+    gap: 12px;
+  }
+  .industry-card h3 {
+    font-size: 17px;
+  }
+  .industry-card .apps li {
+    padding: 8px 10px;
+    font-size: 12px;
   }
 }

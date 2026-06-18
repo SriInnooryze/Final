@@ -34,7 +34,7 @@ function Header() {
             ))}
           </nav>
           <div className="topbar-cta">
-            <a className="btn btn-primary" href="./contact.html" style={{ padding: '12px 22px' }} aria-label="Submit RFQ on contact page">
+            <a className="btn btn-primary" href="./contact.html" aria-label="Submit RFQ on contact page">
               Submit RFQ <span className="arrow" aria-hidden="true">→</span>
             </a>
             <button className="menu-btn" onClick={() => setDrawerOpen(true)} aria-label="Open menu">Menu</button>

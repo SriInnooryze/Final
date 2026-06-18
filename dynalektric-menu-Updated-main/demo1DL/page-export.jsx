@@ -76,7 +76,10 @@ function ExportCapabilityTabs() {
         <div className="export-status-list exp-status-list-narrow">
           {EXP_TRADE.map(item => (
             <div className="export-status-row" key={item.k}>
-              <span>{item.k}</span>
+              <span style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+                <span aria-hidden="true" style={{ color: 'var(--accent)', fontWeight: 700, flexShrink: 0 }}>›</span>
+                {item.k}
+              </span>
               <span className={`export-chip ${EXP_STATUS_CHIP[item.s].cls}`}>{EXP_STATUS_CHIP[item.s].label}</span>
             </div>
           ))}
@@ -94,7 +97,10 @@ function ExportCapabilityTabs() {
         <div className="export-status-list exp-status-list-narrow">
           {EXP_ESG.map(item => (
             <div className="export-status-row" key={item.k}>
-              <span>{item.k}</span>
+              <span style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
+                <span aria-hidden="true" style={{ color: 'var(--accent)', fontWeight: 700, flexShrink: 0 }}>›</span>
+                {item.k}
+              </span>
               <span className={`export-chip ${EXP_STATUS_CHIP[item.s].cls}`}>{EXP_STATUS_CHIP[item.s].label}</span>
             </div>
           ))}
@@ -207,121 +213,80 @@ function ResourcesTabs() {
 }
 
 /* ============================================================
-   EXPORT PROCESS JOURNEY — 8-step zig-zag timeline data
+   EXPORT PROCESS JOURNEY — 4-phase roadmap
    ============================================================ */
-const JOURNEY_STEPS = [
+const JOURNEY_PHASES = [
   {
-    n: '01',
-    title: 'Technical Review',
-    desc: 'We begin by reviewing customer drawings, application requirements and compliance expectations before preparing our offer.',
-    items: ['Drawings review', 'Technical clarification', 'Customer discussions'],
-    itemLabel: 'Activities',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="11" cy="11" r="7"/>
-        <line x1="21" y1="21" x2="15.65" y2="15.65"/>
-        <line x1="8.5" y1="11" x2="13.5" y2="11"/>
-        <line x1="11" y1="8.5" x2="11" y2="13.5"/>
-      </svg>
-    ),
+    phase: '01',
+    name: 'Enquiry & Proposal',
+    steps: [
+      {
+        n: '01',
+        title: 'Technical Review',
+        desc: 'Customer drawings, application requirements and compliance expectations reviewed.',
+        items: ['Drawings review', 'Technical clarification', 'Customer discussions'],
+      },
+      {
+        n: '02',
+        title: 'Commercial Proposal',
+        desc: 'Commercial offer prepared with delivery schedule, Incoterms and lead time commitments.',
+        items: ['Commercial offer', 'Incoterms', 'Lead time estimation'],
+      },
+    ],
   },
   {
-    n: '02',
-    title: 'Commercial Proposal',
-    desc: 'A competitive commercial offer is prepared with delivery schedule, Incoterms and lead time commitments.',
-    items: ['Commercial offer', 'Incoterms', 'Lead time estimation'],
-    itemLabel: 'Deliverables',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-        <polyline points="14 2 14 8 20 8"/>
-        <line x1="8" y1="13" x2="16" y2="13"/>
-        <line x1="8" y1="17" x2="12" y2="17"/>
-      </svg>
-    ),
+    phase: '02',
+    name: 'Engineering & Production',
+    steps: [
+      {
+        n: '03',
+        title: 'Engineering & Manufacturing',
+        desc: 'Design, planning and manufacturing executed for the confirmed order.',
+        items: ['Transformers', 'Control Panels', 'Battery Chargers', 'Custom assemblies'],
+      },
+      {
+        n: '04',
+        title: 'Testing & FAT',
+        desc: 'Routine quality tests and Factory Acceptance Tests conducted before dispatch.',
+        items: ['Routine tests', 'Factory Acceptance Test', 'Third-party inspection'],
+      },
+    ],
   },
   {
-    n: '03',
-    title: 'Engineering & Manufacturing',
-    desc: 'Our engineering team executes design, planning and manufacturing for the confirmed order.',
-    items: ['Transformers', 'Control Panels', 'Battery Chargers', 'Custom assemblies'],
-    itemLabel: 'Capabilities',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="12" cy="12" r="3"/>
-        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
-      </svg>
-    ),
+    phase: '03',
+    name: 'Documentation & Logistics',
+    steps: [
+      {
+        n: '05',
+        title: 'Documentation',
+        desc: 'Export documentation prepared and verified for international shipment compliance.',
+        items: ['Packing List', 'Commercial Invoice', 'Certificate of Origin', 'Test Certificates'],
+      },
+      {
+        n: '06',
+        title: 'Shipping & Customs',
+        desc: 'Export clearance and freight coordination managed end-to-end.',
+        items: ['Export clearance', 'Freight coordination', 'Customs support'],
+      },
+    ],
   },
   {
-    n: '04',
-    title: 'Testing & FAT',
-    desc: 'Products undergo routine quality tests and formal Factory Acceptance Tests before dispatch.',
-    items: ['Routine tests', 'Factory Acceptance Test', 'Third-party inspection'],
-    itemLabel: 'Deliverables',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M9 11l3 3L22 4"/>
-        <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
-      </svg>
-    ),
-  },
-  {
-    n: '05',
-    title: 'Documentation',
-    desc: 'All required export documentation is prepared and verified for international shipment compliance.',
-    items: ['Packing List', 'Commercial Invoice', 'Certificate of Origin', 'Test Certificates'],
-    itemLabel: 'Documents',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <polygon points="12 2 2 7 12 12 22 7 12 2"/>
-        <polyline points="2 17 12 22 22 17"/>
-        <polyline points="2 12 12 17 22 12"/>
-      </svg>
-    ),
-  },
-  {
-    n: '06',
-    title: 'Shipping & Customs',
-    desc: 'Export clearance and freight coordination are managed end-to-end for smooth border crossing.',
-    items: ['Export clearance', 'Freight coordination', 'Customs support'],
-    itemLabel: 'Activities',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="12" cy="12" r="10"/>
-        <line x1="2" y1="12" x2="22" y2="12"/>
-        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-      </svg>
-    ),
-  },
-  {
-    n: '07',
-    title: 'Delivery',
-    desc: 'Shipment is dispatched on the agreed schedule with material handling support and customer coordination.',
-    items: ['On-time shipment', 'Material handling', 'Customer coordination'],
-    itemLabel: 'Activities',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <line x1="16.5" y1="9.4" x2="7.5" y2="4.21"/>
-        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/>
-        <polyline points="3.27 6.96 12 12.01 20.73 6.96"/>
-        <line x1="12" y1="22.08" x2="12" y2="12"/>
-      </svg>
-    ),
-  },
-  {
-    n: '08',
-    title: 'After-Sales Support',
-    desc: 'We provide ongoing technical assistance, spare part guidance and responsive customer communication post-delivery.',
-    items: ['Technical support', 'Spare assistance', 'Customer communication'],
-    itemLabel: 'Services',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M3 18v-6a9 9 0 0 1 18 0v6"/>
-        <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3z"/>
-        <path d="M3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/>
-      </svg>
-    ),
+    phase: '04',
+    name: 'Delivery & Support',
+    steps: [
+      {
+        n: '07',
+        title: 'Delivery',
+        desc: 'Shipment dispatched on schedule with material handling and customer coordination.',
+        items: ['On-time shipment', 'Material handling', 'Customer coordination'],
+      },
+      {
+        n: '08',
+        title: 'After-Sales Support',
+        desc: 'Technical assistance, spare part guidance and responsive customer communication post-delivery.',
+        items: ['Technical support', 'Spare assistance', 'Customer communication'],
+      },
+    ],
   },
 ];
 
@@ -622,49 +587,36 @@ function PageExport({ navigate }) {
             </div>
             <div>
               <h2>Export Process Journey</h2>
-              <p className="export-sub">Eight structured steps — from initial enquiry to delivery and after-sales support.</p>
+              <p className="export-sub">Eight structured steps across four phases — from initial enquiry to delivery and after-sales support.</p>
             </div>
           </div>
 
-          <div className="exp-journey" role="list" aria-label="Export process steps">
-            {JOURNEY_STEPS.map((step, i) => {
-              const isLeft = i % 2 === 0;
-              return (
-                <div key={step.n}
-                     className={`exp-journey-row exp-journey-row--${isLeft ? 'left' : 'right'}`}
-                     role="listitem">
-                  <div className="exp-journey-col-card">
-                    <div className="exp-journey-card">
-                      <div className="exp-journey-card-top">
-                        <div className="exp-journey-icon" aria-hidden="true">{step.icon}</div>
-                        <div className="exp-journey-head">
-                          <span className="exp-journey-num">{step.n}</span>
-                          <h3 className="exp-journey-title">{step.title}</h3>
-                        </div>
+          <div className="exp-roadmap" role="list" aria-label="Export process phases">
+            {JOURNEY_PHASES.map((phase) => (
+              <div className="exp-phase" key={phase.phase} role="listitem">
+                <div className="exp-phase-hd">
+                  <span className="exp-phase-num">{phase.phase}</span>
+                  <span className="exp-phase-name">{phase.name}</span>
+                </div>
+                <div className="exp-phase-body">
+                  {phase.steps.map(step => (
+                    <div className="exp-phase-step" key={step.n}>
+                      <div className="exp-step-hd">
+                        <span className="exp-step-n">{step.n}</span>
+                        <span className="exp-step-title">{step.title}</span>
                       </div>
-                      <p className="exp-journey-desc">{step.desc}</p>
-                      <div className="exp-journey-rule" aria-hidden="true" />
-                      <div className="exp-journey-items-label">{step.itemLabel}</div>
-                      <ul className="exp-journey-items">
-                        {step.items.map((item, j) => (
-                          <li key={j}>
-                            <span className="exp-journey-check" aria-hidden="true">&#10003;</span>
-                            <span>{item}</span>
-                          </li>
-                        ))}
+                      <p className="exp-step-desc">{step.desc}</p>
+                      <ul className="exp-step-items">
+                        {step.items.map((item, i) => <li key={i}>{item}</li>)}
                       </ul>
                     </div>
-                  </div>
-                  <div className="exp-journey-mid" aria-hidden="true">
-                    <div className="exp-journey-dot" />
-                  </div>
-                  <div className="exp-journey-col-space" aria-hidden="true" />
+                  ))}
                 </div>
-              );
-            })}
+              </div>
+            ))}
           </div>
 
-          <p className="exp-fineprint" style={{ marginTop: 32 }}>
+          <p className="exp-fineprint" style={{ marginTop: 24 }}>
             Indicative sequence. Specific milestones are aligned with customer project requirements and confirmed at order.
           </p>
         </div>

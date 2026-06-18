@@ -61,6 +61,7 @@ function PageIndustries({ navigate, focusId }) {
           </div>
 
           <div className="matrix-wrap">
+            <div className="matrix-table-wrap">
             <div className="matrix-table matrix-4col">
               {/* Header row */}
               <div className="matrix-cell head">Industry · Product group</div>
@@ -101,6 +102,7 @@ function PageIndustries({ navigate, focusId }) {
                 </React.Fragment>
               ))}
             </div>
+            </div>{/* /matrix-table-wrap */}
 
             {/* Detail panel */}
             <aside className="industry-detail">

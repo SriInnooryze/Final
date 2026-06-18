@@ -241,14 +241,15 @@ function PageProducts({ navigate, focusId }) {
   </div>
 
   {/* Right side image */}
-  <div>
+  <div className="prodx-detail-img-wrap">
     <img
       src={`./assets/${sub.code}.jpg`}
       alt={sub.name}
       style={{
         width: "100%",
-        borderRadius: "12px",
-        objectFit: "cover"
+        height: "100%",
+        objectFit: "cover",
+        display: "block"
       }}
     />
   </div>
