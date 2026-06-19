@@ -183,7 +183,7 @@ p { color: var(--ink-soft); text-wrap: pretty; font-size: clamp(1rem, 1.1vw, 1.0
   white-space: nowrap;
 }
 .topbar-cta .btn {
-  padding: 12px 16px;
+  padding: 8px 16px;
   font-size: 14px;
   gap: 8px;
 }
@@ -239,12 +239,12 @@ p { color: var(--ink-soft); text-wrap: pretty; font-size: clamp(1rem, 1.1vw, 1.0
   align-items: center;
   gap: 32px;
   /* Fluid gutter: shrinks at laptop widths to give nav room, independent of --gutter */
-  padding: 28px clamp(36px, 3.5vw, 64px);
+  padding: 14px clamp(24px, 2.5vw, 48px);
   max-width: 1800px;
   margin: 0 auto;
 }
 .topbar-logo { display: flex; align-items: center; flex: 0 0 auto; }
-.topbar-logo img { width: 100%; height: auto; display: block; object-fit: contain; }
+.topbar-logo img { width: 100%; height: auto; max-height: 44px; display: block; object-fit: contain; object-position: left center; }
 .topbar-nav {
   display: flex;
   gap: 16px;
@@ -259,7 +259,7 @@ p { color: var(--ink-soft); text-wrap: pretty; font-size: clamp(1rem, 1.1vw, 1.0
   line-height: 1.2;
   letter-spacing: 0;
   color: var(--ink-muted);
-  padding: 8px 5px;
+  padding: 6px 5px;
   border-radius: var(--radius);
   cursor: pointer;
   transition: color 150ms;
@@ -287,20 +287,20 @@ p { color: var(--ink-soft); text-wrap: pretty; font-size: clamp(1rem, 1.1vw, 1.0
 .topbar-meta { font-family: var(--font-mono); font-size: 11px; color: var(--ink-muted); letter-spacing: 0.1em; text-transform: uppercase; white-space: nowrap; }
 
 @media (min-width: 1440px) {
-  .topbar-logo { width: 350px; }
+  .topbar-logo { width: 315px; }
 }
 
 @media (min-width: 1024px) and (max-width: 1439px) {
-  .topbar-logo { width: 244px; }
+  .topbar-logo { width: 220px; }
 }
 @media (min-width: 768px) and (max-width: 1023px) {
-  .topbar-logo { width: 165px; }
+  .topbar-logo { width: 148px; }
 }
 @media (min-width: 375px) and (max-width: 767px) {
-  .topbar-logo { width: 182px; }
+  .topbar-logo { width: 164px; }
 }
 @media (max-width: 374px) {
-  .topbar-logo { width: 165px; }
+  .topbar-logo { width: 148px; }
 }
 @media (max-width: 1080px) {
   .topbar-inner {
@@ -366,7 +366,7 @@ p { color: var(--ink-soft); text-wrap: pretty; font-size: clamp(1rem, 1.1vw, 1.0
   margin-top: var(--section-y);
   position: relative;
 }
-/* Layered top edge: 1px neutral gray, 1px gap, 2px red accent — flush with footer top */
+/* Layered top edge: 3px visible gray stripe, then 3px red accent — flush with footer top */
 .footer::before,
 .footer::after {
   content: '';
@@ -375,12 +375,12 @@ p { color: var(--ink-soft); text-wrap: pretty; font-size: clamp(1rem, 1.1vw, 1.0
 }
 .footer::before {
   top: 0;
-  height: 1px;
-  background: rgba(255, 255, 255, 0.3);
+  height: 3px;
+  background: rgba(255, 255, 255, 0.60);
 }
 .footer::after {
-  top: 1px;
-  height: 2px;
+  top: 3px;
+  height: 3px;
   background: var(--red);
 }
 .footer h4 { color: var(--on-dark); font-size: 13px; font-family: var(--font-mono); letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600; opacity: 0.8; margin-bottom: 20px; }
@@ -396,9 +396,9 @@ p { color: var(--ink-soft); text-wrap: pretty; font-size: clamp(1rem, 1.1vw, 1.0
 @media (max-width: 800px) {
   .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; }
   .footer-bottom { flex-direction: column; gap: 12px; align-items: flex-start; }
-  /* On narrow screens collapse to a single red line */
-  .footer::before { display: none; }
-  .footer::after { top: 0; height: 2px; }
+  /* Keep both divider lines visible on all screen sizes */
+  .footer::before { display: block; height: 3px; top: 0; }
+  .footer::after { top: 3px; height: 3px; }
 }
 .contact-map{
     overflow: hidden;

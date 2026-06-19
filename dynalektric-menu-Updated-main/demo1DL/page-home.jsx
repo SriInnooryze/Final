@@ -209,8 +209,8 @@ function CapabilityCarousel({ navigate }) {
           <b>{String(index + 1).padStart(2, '0')}</b> / {String(total).padStart(2, '0')}
         </div>
         <div className="capcar-foot">
-          <button className="btn btn-ghost" onClick={() => navigate('products')}>
-            Explore all products and solutions →
+          <button className="btn btn-ghost btn-ghost-text" onClick={() => navigate('products')}>
+            Explore all products and solutions <span className="arrow">→</span>
           </button>
         </div>
       </div>
@@ -592,7 +592,7 @@ function OrgSection({ navigate }) {
                 </li>
               ))}
             </ul>
-            <button className="btn btn-ghost org-cta" onClick={() => navigate('about')}>
+            <button className="btn btn-ghost btn-ghost-text org-cta" onClick={() => navigate('about')}>
               About Dynalektric <span className="arrow">→</span>
             </button>
           </div>
@@ -807,8 +807,8 @@ function PageHome({ navigate, tweaks }) {
               <p className="lead" style={{ marginTop: 24 }}>
                 Our engineering and new product development teams take a customer specification through feasibility, design, prototyping, validation and pilot production. One team, one process.
               </p>
-              <button className="btn btn-ghost" style={{ marginTop: 32 }} onClick={() => navigate('rnd')}>
-                View engineering capability →
+              <button className="btn btn-ghost btn-ghost-text" style={{ marginTop: 32 }} onClick={() => navigate('rnd')}>
+                View engineering capability <span className="arrow">→</span>
               </button>
             </div>
             <div className="rnd-teaser-visual">

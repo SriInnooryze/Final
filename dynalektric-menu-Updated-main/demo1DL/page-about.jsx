@@ -167,11 +167,11 @@ function PageAbout({ navigate }) {
             <div className="eyebrow"><span className="mono">Facility</span></div>
             <div><h2>One floor, one team, one engineering culture.</h2></div>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 32 }}>
+          <div className="about-facility-grid">
             <div className="placeholder-stripe" style={{ aspectRatio: '16/9' }}><span>Facility wide-shot, placeholder</span></div>
-            <div style={{ display: 'grid', gridTemplateRows: '1fr 1fr', gap: 32 }}>
-              <div className="placeholder-stripe" style={{ width: '100%' }}><span>Winding floor</span></div>
-              <div className="placeholder-stripe" style={{ width: '100%' }}><span>Test bay</span></div>
+            <div className="about-facility-sub">
+              <div className="placeholder-stripe"><span>Winding floor</span></div>
+              <div className="placeholder-stripe"><span>Test bay</span></div>
             </div>
           </div>
         </div>
