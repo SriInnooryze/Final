@@ -203,7 +203,7 @@
 .export-verify-actions { display: flex; flex-direction: column; gap: 10px; }
 .export-verify-actions .btn { justify-content: center; }
 .btn-ghost.on-dark { color: var(--on-dark); border-color: rgba(255,255,255,0.2); border-bottom-color: rgba(255,255,255,0.4); }
-.btn-ghost.on-dark:hover { color: #fff; border-color: var(--accent); }
+.btn-ghost.on-dark:hover { color: #fff; border-color: var(--red); }
 
 /* ===== SECTION 4 — CERT MATRIX ===== */
 .exp-cert-legend { display: flex; flex-wrap: wrap; gap: 18px; margin-bottom: 28px; }

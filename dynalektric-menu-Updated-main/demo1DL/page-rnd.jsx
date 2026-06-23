@@ -3,27 +3,45 @@
 const FOCUS_AREAS = [
   {
     num: '01',
-    title: 'Magnetics engineering',
-    body: 'Design and development of transformers, reactors and magnetic components for industrial, railway and renewable applications.',
-    deliverables: ['LV Transformers', 'MV Transformers', 'Air-Core Reactors', 'De-tuned Reactors'],
+    title: 'Traction Product Development',
+    body: 'Engineering and development of traction and auxiliary power products supporting railway and mobility applications.',
+    deliverables: [
+      'Locomotive Transformer',
+      'Metro Coach Traction Transformer',
+      'Vande Bharat Traction Transformer',
+      'Battery Charger',
+      'Converter (Traction, Auxiliary & Hotel)',
+    ],
   },
   {
     num: '02',
-    title: 'Control panel engineering',
-    body: 'Engineering and manufacturing of locomotive panels, driver desk panels and power distribution assemblies.',
-    deliverables: ['Locomotive Panels', 'Driver Desk Panels', 'PDUs', 'Power Panels'],
+    title: 'Renewable Product Development',
+    body: 'Power products and grid interface solutions supporting renewable energy and battery storage applications.',
+    deliverables: [
+      'Inverter Duty Transformer',
+      'BESS Power Pack – Pre-Engineered Grid Interface for BESS Container Deployment',
+    ],
   },
   {
     num: '03',
-    title: 'Power electronics solutions',
-    body: 'Battery charging and power conversion systems for material handling, utility and special applications.',
-    deliverables: ['MHE Battery Chargers', 'Float Cum Boost Chargers', 'Special Application Chargers', 'UPS Systems'],
+    title: 'IoT & Communication Systems',
+    body: 'Monitoring and communication platforms enabling intelligent power management and remote diagnostics.',
+    deliverables: [
+      'Distributed Power with Communication System',
+      'On-board Remote Monitoring System',
+      'CAN Bus & IoT for MHE Chargers',
+    ],
   },
   {
     num: '04',
-    title: 'OEM integration solutions',
-    body: 'Custom electrical assemblies and sub-systems supporting railway and industrial customers.',
-    deliverables: ['Busbars', 'Wire Harnesses', 'Current Sensors', 'Fire Detection Units'],
+    title: 'Power Modules & Integrated Power Systems',
+    body: 'Integrated power conversion modules and power supply systems for industrial and mobility applications.',
+    deliverables: [
+      'SMPS Power Supplies',
+      'Redundant Power Supplies',
+      'Converters',
+      'DC-DC Converters',
+    ],
   },
 ];
 
