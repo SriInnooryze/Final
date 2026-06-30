@@ -75,7 +75,7 @@ function PageProducts({ navigate, focusId }) {
           </div>
           <div className="page-hero-visual">
             <img
-              src="./assets/card-control.jpg"
+              src="./assets/product-hero.jpg"
               alt="Dynalektric control panel and power electronics manufacturing"
               width="720"
               height="540"
