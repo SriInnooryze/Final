@@ -1,12 +1,11 @@
 {
   "version": 2,
-  "routes": [
+  "cleanUrls": false,
+  "trailingSlash": false,
+  "rewrites": [
     {
-      "src": "^/$",
-      "dest": "/index.html"
-    },
-    {
-      "handle": "filesystem"
+      "source": "/",
+      "destination": "/index.html"
     }
   ]
 }
