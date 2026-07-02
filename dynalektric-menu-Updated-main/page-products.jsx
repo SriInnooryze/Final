@@ -1,5 +1,17 @@
 /* page-products.jsx — interactive product explorer */
 
+// Actual filenames on disk differ from group IDs for case-sensitive Linux servers
+const GROUP_IMG_FILENAME = {
+  'control-panels': 'control-Panels.jpg',
+};
+// Sub-category codes that have a corresponding image file in assets/
+const SUBCAT_IMG_SET = new Set([
+  '01.1','01.2','01.3','01.4','01.6',
+  '02.1','02.2',
+  '03.1','03.2',
+  '04.1','04.2','04.3','04.4','04.5',
+]);
+
 function PageProducts({ navigate, focusId }) {
   useReveal();
 
@@ -75,10 +87,12 @@ function PageProducts({ navigate, focusId }) {
           </div>
           <div className="page-hero-visual">
             <img
-              src="./assets/product-hero.jpg"
+              src="./assets/Product-hero.jpg"
               alt="Dynalektric control panel and power electronics manufacturing"
               width="720"
               height="540"
+              decoding="async"
+              fetchpriority="high"
             />
           </div>
         </div>
@@ -152,10 +166,12 @@ function PageProducts({ navigate, focusId }) {
                 </div>
                 <div className="prodx-group-image">
                  <img
-                  src={`./assets/${group.id}.jpg`}
+                  src={`./assets/${GROUP_IMG_FILENAME[group.id] || group.id + '.jpg'}`}
                  alt={group.name}
                  width="720"
                  height="540"
+                 loading="lazy"
+                 decoding="async"
                  style={{
                    width: "100%",
                    height: "100%",
@@ -240,19 +256,23 @@ function PageProducts({ navigate, focusId }) {
     <p>{subDetail.description || sub.detail}</p>
   </div>
 
-  {/* Right side image */}
-  <div className="prodx-detail-img-wrap">
-    <img
-      src={`./assets/${sub.code}.jpg`}
-      alt={sub.name}
-      style={{
-        width: "100%",
-        height: "100%",
-        objectFit: "contain",
-        display: "block"
-      }}
-    />
-  </div>
+  {/* Right side image — only rendered when an asset exists for this sub-code */}
+  {SUBCAT_IMG_SET.has(sub.code) && (
+    <div className="prodx-detail-img-wrap">
+      <img
+        src={`./assets/${sub.code}.jpg`}
+        alt={sub.name}
+        loading="lazy"
+        decoding="async"
+        style={{
+          width: "100%",
+          height: "100%",
+          objectFit: "contain",
+          display: "block"
+        }}
+      />
+    </div>
+  )}
 
 </header>
 

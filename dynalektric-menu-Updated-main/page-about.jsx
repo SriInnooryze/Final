@@ -16,10 +16,12 @@ function PageAbout({ navigate }) {
           </div>
           <div className="page-hero-visual">
             <img
-              src="assets\about-hero.jpg"
+              src="assets/about-hero.jpg"
               alt="Dynalektric manufacturing facility"
               width="720"
               height="540"
+              decoding="async"
+              fetchpriority="high"
             />
           </div>
         </div>
@@ -173,6 +175,8 @@ function PageAbout({ navigate }) {
                 src="./assets/facility-wide-shot.jpg"
                 alt="Dynalektric manufacturing facility"
                 style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                loading="lazy"
+                decoding="async"
               />
             </div>
             <div className="about-facility-sub">
@@ -181,6 +185,8 @@ function PageAbout({ navigate }) {
                   src="./assets/winding-floor.jpg"
                   alt="Winding floor — transformer and magnetics winding"
                   style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
               <div style={{ overflow: 'hidden', borderRadius: '8px', height: '100%' }}>
@@ -188,6 +194,8 @@ function PageAbout({ navigate }) {
                   src="./assets/test-bay.jpg"
                   alt="Dynalektric test bay"
                   style={{ width: '100%', height: '100%', objectFit: 'cover', display: 'block' }}
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
             </div>

@@ -24,10 +24,12 @@ function PageIndustries({ navigate, focusId }) {
           </div>
           <div className="page-hero-visual">
             <img
-              src="./assets/industries-hero.jpg"
+              src="./assets/industry-railways.jpg"
               alt="Railway infrastructure — Dynalektric traction and industrial applications"
               width="720"
               height="540"
+              decoding="async"
+              fetchpriority="high"
             />
           </div>
         </div>

@@ -72,6 +72,8 @@ function PageRnd({ navigate }) {
               alt="Dynalektric engineering and product development"
               width="720"
               height="540"
+              decoding="async"
+              fetchpriority="high"
             />
           </div>
         </div>
@@ -143,10 +145,12 @@ function PageRnd({ navigate }) {
             </div>
            <div style={{ aspectRatio: '4/3' }}>
             <img
-              src="./assets/engineering-bench.jpg"
+              src="./assets/engineering-npd.jpg"
               alt="Dynalektric engineering and manufacturing"
               width="720"
               height="540"
+              loading="lazy"
+              decoding="async"
               style={{
                 width: '100%',
                 height: '100%',

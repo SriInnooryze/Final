@@ -123,6 +123,8 @@ function PageContact({ navigate }) {
                 alt="Dynalektric precision magnetics and transformer manufacturing"
                 width="720"
                 height="540"
+                decoding="async"
+                fetchpriority="high"
               />
             </div>
           </div>
@@ -205,10 +207,12 @@ function PageContact({ navigate }) {
           </div>
           <div className="page-hero-visual">
             <img
-              src="./assets/contact-hero.jpg"
+              src="./assets/inside-dynalektric.jpg"
               alt="Dynalektric precision magnetics and transformer manufacturing"
               width="720"
               height="540"
+              decoding="async"
+              fetchpriority="high"
             />
           </div>
         </div>
