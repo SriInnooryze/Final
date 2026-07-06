@@ -792,8 +792,7 @@ function Footer() {
           <span>© {currentYear} Dynalektric · Power · Motion · Safety</span>
           <span>Engineered in India · Exported worldwide</span>
         </div>
-      </div>
-      <div className="footer-duns-seal">
+         <div className="footer-duns-seal">
   <iframe
     id="Iframe1"
     src="https://dunsregistered.dnb.com/SealAuthentication.aspx?Cid=1"
@@ -803,8 +802,9 @@ function Footer() {
     scrolling="no"
     allowTransparency="true"
     title="D-U-N-S Registered Seal"
-  />
-</div>
+    />
+    </div>
+      </div>
     </footer>
   );
 }
