@@ -755,6 +755,18 @@ function Footer() {
           <div className="footer-col">
             <img className="footer-logo" src={(window.__resources && window.__resources.dynaLogoReversed) || "assets/Dynalektric-logo-reversed2.png"} alt="Dynalektric logo" width="320" height="200" loading="lazy" />
             <p className="footer-tag">Magnetics, control panels, power electronics and cross-segment components. Engineered in India for industrial, power, railway, renewable and material handling applications worldwide.</p>
+            <div className="footer-duns-seal">
+    <iframe
+      id="Iframe1"
+      src="https://dunsregistered.dnb.com/SealAuthentication.aspx?Cid=1"
+      width="114"
+      height="97"
+      frameBorder="0"
+      scrolling="no"
+      allowTransparency="true"
+      title="D-U-N-S Registered Seal"
+    />
+  </div>
           </div>
           <div className="footer-col">
             <h4>Sitemap</h4>

@@ -12,7 +12,7 @@ function exportTrack(event, detail) {
 
 /* ---------- Section 1: hero trust indicators ---------- */
 const EXP_TRUST = [
-  { label: 'ISO 9001 quality system', state: 'active',  note: 'Held' },
+  { label: 'IMS 9001 : 14001 : 45001', state: 'active', note: 'Held' },
   { label: 'IEC-aligned product design', state: 'active', note: 'Standard practice' },
   { label: 'Inspection and FAT support', state: 'active', note: 'Supported' },
   { label: 'Export documentation readiness', state: 'cond', note: 'Available based on requirement' },
@@ -86,9 +86,9 @@ const CERT_GROUPS = [
   {
     group: 'Product and market standards',
     rows: [
-      { name: 'IEC 60076', scope: 'Power transformers', status: 'held', product: 'Magnetics', region: 'All', note: 'Products designed and routine / type tested to this standard.' },
-      { name: 'IEC 61439', scope: 'LV switchgear and controlgear assemblies', status: 'held', product: 'Control panels', region: 'All', note: 'Type-tested assembly evidence available per order.' },
-      { name: 'IEC 61558', scope: 'Safety of transformers and reactors', status: 'held', product: 'Magnetics', region: 'All', note: 'Applied where relevant to product category.' },
+      { name: 'IEC 60076', scope: 'Power transformers', status: 'complied', product: 'Magnetics', region: 'All', note: 'Products designed and routine / type tested to this standard.' },
+      { name: 'IEC 61439', scope: 'LV switchgear and controlgear assemblies', status: 'complied', product: 'Control panels', region: 'All', note: 'Type-tested assembly evidence available per order.' },
+      { name: 'IEC 61558', scope: 'Safety of transformers and reactors', status: 'complied', product: 'Magnetics', region: 'All', note: 'Applied where relevant to product category.' },
       { name: 'CE', scope: 'European conformity', status: 'available', product: 'Per product', region: 'EU / EEA', note: 'Evaluated based on product, directive and destination.' },
       { name: 'UL', scope: 'North American safety', status: 'available', product: 'Per product', region: 'North America', note: 'Evaluated based on product and order requirement.' },
       { name: 'EN 50155', scope: 'Railway electronic equipment', status: 'available', product: 'Rail electronics', region: 'Rail markets', note: 'Evaluated based on rolling-stock requirement.' },
@@ -97,6 +97,7 @@ const CERT_GROUPS = [
 ];
 const CERT_STATUS = {
   held:      { label: 'Held', cls: 'is-held' },
+  complied:  { label: 'Complied', cls: 'is-complied' },
   progress:  { label: 'In Progress', cls: 'is-progress' },
   available: { label: 'Available based on requirement', cls: 'is-available' },
 };
@@ -104,32 +105,92 @@ const CERT_STATUS = {
 /* ---------- Section 5: destination-market clearance ---------- */
 const EXP_CLEARANCE = [
   {
-    id: 'sa', country: 'Saudi Arabia', region: 'GCC and Middle East',
-    schemes: ['SASO / SABER platform registration', 'Product Certificate of Conformity (PCoC)', 'Shipment Certificate of Conformity (SCoC)', 'Local importer holds the SABER account'],
+    id: 'usa',
+    country: 'USA',
+    region: 'North America',
+    schemes: [
+      'Applicable UL / NRTL product safety requirements reviewed',
+      'Product testing and certification route confirmed where required',
+      'Technical documentation and test evidence prepared for review',
+      'Importer and customer compliance requirements confirmed',
+    ],
   },
   {
-    id: 'gcc', country: 'GCC (general)', region: 'GCC and Middle East',
-    schemes: ['G-Mark for in-scope products', 'ECAS registration where applicable', 'Importer-led conformity steps'],
+    id: 'canada',
+    country: 'Canada',
+    region: 'North America',
+    schemes: [
+      'Applicable Canadian electrical safety requirements reviewed',
+      'SCC-accredited certification or inspection route assessed where required',
+      'Product test reports and technical documentation reviewed',
+      'Importer and provincial requirements confirmed per product',
+    ],
   },
   {
-    id: 'ng', country: 'Nigeria', region: 'Africa',
-    schemes: ['SONCAP product certificate', 'Product registration via accepted route', 'Pre-shipment inspection where required'],
+    id: 'uk',
+    country: 'UK',
+    region: 'United Kingdom',
+    schemes: [
+      'Applicable UK product regulations identified',
+      'UKCA or accepted CE marking route reviewed where applicable',
+      'Technical documentation and conformity evidence prepared',
+      'Importer and product-specific requirements confirmed',
+    ],
   },
   {
-    id: 'ke', country: 'Kenya', region: 'Africa',
-    schemes: ['PVoC (Pre-Export Verification of Conformity)', 'Certificate of Conformity per consignment', 'Accepted test reports where applicable'],
+    id: 'eu',
+    country: 'EU',
+    region: 'European Union',
+    schemes: [
+      'Applicable EU directives and regulations identified',
+      'CE conformity assessment route reviewed where applicable',
+      'Technical documentation and Declaration of Conformity requirements reviewed',
+      'Product marking and importer responsibilities confirmed',
+    ],
   },
   {
-    id: 'eg', country: 'Egypt', region: 'Africa',
-    schemes: ['Importer registration (GOEIC) requirements', 'Conformity documentation per category', 'Local representation as required'],
+    id: 'uae',
+    country: 'UAE',
+    region: 'Middle East',
+    schemes: [
+      'Product scope reviewed against UAE regulated-product requirements',
+      'ECAS or EQM conformity route assessed where applicable',
+      'Required test reports and conformity documents prepared',
+      'Importer and local registration responsibilities confirmed',
+    ],
   },
   {
-    id: 'tz', country: 'Tanzania', region: 'Africa',
-    schemes: ['PVoC route of conformity', 'Certificate of Conformity per shipment', 'Pre-shipment inspection where required'],
+    id: 'sa',
+    country: 'Saudi Arabia',
+    region: 'Middle East',
+    schemes: [
+      'SASO / SABER product requirements reviewed',
+      'Product Certificate of Conformity route assessed where applicable',
+      'Shipment conformity documentation coordinated',
+      'Local importer and SABER responsibilities confirmed',
+    ],
   },
   {
-    id: 'ug', country: 'Uganda', region: 'Africa',
-    schemes: ['PVoC route of conformity', 'Certificate of Conformity per shipment', 'Accepted test reports where applicable'],
+    id: 'kuwait',
+    country: 'Kuwait',
+    region: 'Middle East',
+    schemes: [
+      'Product scope reviewed against KUCAS requirements',
+      'Applicable conformity assessment route identified',
+      'Technical inspection and test documentation prepared where required',
+      'Importer and Kuwait PAI requirements confirmed',
+    ],
+  },
+  {
+    id: 'australia',
+    country: 'Australia',
+    region: 'Oceania',
+    schemes: [
+      'Applicable Australian electrical safety requirements reviewed',
+      'EESS product classification assessed where applicable',
+      'RCM compliance and marking requirements reviewed',
+      'Responsible supplier and importer requirements confirmed',
+    ],
   },
 ];
 const EXP_TESTING_SUPPORT = [
@@ -158,7 +219,7 @@ const EXP_TRADE = [
   { k: 'End-use review', s: 'available' },
   { k: 'End-user review', s: 'available' },
   { k: 'India export-control framework', s: 'available' },
-  { k: 'SCOMET review, where applicable', s: 'review' },
+  { k: 'Certificate of Origin', s: 'available' },
   { k: 'NDA process', s: 'available' },
   { k: 'Intellectual-property protection process', s: 'available' },
 ];
@@ -168,7 +229,7 @@ const EXP_ESG = [
   { k: 'Conflict-minerals policy', s: 'available' },
   { k: 'ISO 14001 status', s: 'available' },
   { k: 'ISO 45001 status', s: 'available' },
-  { k: 'Product carbon-footprint data, where supported', s: 'review' },
+ 
 ];
 const EXP_STATUS_CHIP = {
   available:   { label: 'Available', cls: 'chip-available' },
