@@ -822,9 +822,10 @@ function Footer() {
             <h4>Enquiries</h4>
 
             <ul>
-              <li><a>+91 (placeholder)</a></li>
+              <li><a>+91-903 554 2821</a></li>
+              <li><a>+91-903 554 2827</a></li>
               <li><a>sales01@dynalektric.com</a></li>
-              <li><a>enquiry@dynalektric.com</a></li>
+              <li><a>cs@dynalektric.com</a></li>
               <li>
                 <a href="./contact.html">
                   Submit RFQ →

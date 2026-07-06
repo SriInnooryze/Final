@@ -358,19 +358,24 @@ function PageContact({ navigate }) {
             </div>
             <div className="contact-info-block">
               <div className="label">General email</div>
-              <div className="value">enquiry@dynalektric.com</div>
+              <div className="value">cs@dynalektric.com</div>
             </div>
             <div className="contact-info-block">
               <div className="label">Phone</div>
-              <div className="value">+91 (placeholder)</div>
+              <div className="value">+91-903 554 2821</div>
+              <div className="value">+91-903 554 2827</div>
             </div>
             <div className="contact-info-block">
               <div className="label">Address</div>
-              <div className="value">Dynalektric Pvt. Ltd.<br />Manufacturing facility<br />India (placeholder)</div>
+              <div className="value">Dynalektric Pvt. Ltd.<br />Manufacturing facility<br />No-49/2
+                 Vaderamanchanahalli Village,
+                 Kallubalu, Anekal Taluk,
+                 Jigani Hobli,
+                 Bangalore, India- 560105</div>
             </div>
             <div className="contact-info-block">
               <div className="label">Working hours</div>
-              <div className="value">Mon to Sat, 09:00 to 18:00 IST</div>
+              <div className="value">Mon to Sat, 09:00 to 21:00 IST</div>
             </div>
             <div className="contact-info-block">
               <div className="label">For procurement teams</div>
