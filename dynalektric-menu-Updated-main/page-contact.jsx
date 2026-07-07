@@ -40,7 +40,60 @@ function PageContact({ navigate }) {
   const [errors, setErrors] = React.useState({});
   const [submitted, setSubmitted] = React.useState(false);
 
+  const [isSubmitting, setIsSubmitting] = React.useState(false);
+  const [submitError, setSubmitError] = React.useState('');
+  const [leadId, setLeadId] = React.useState('');
+
+  const submissionIdRef = React.useRef(
+    crypto.randomUUID()
+ );
+
   const set = (k, v) => setForm(f => ({ ...f, [k]: v }));
+
+  const fileToBase64 = (selectedFile) => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      try {
+        const result = String(reader.result || '');
+
+        const base64Data =
+          result.split(',')[1];
+
+        if (!base64Data) {
+          reject(
+            new Error(
+              'Unable to process the selected document.'
+            )
+          );
+
+          return;
+        }
+
+        resolve(base64Data);
+      } catch (error) {
+        reject(
+          new Error(
+            'Unable to process the selected document.'
+          )
+        );
+      }
+    };
+
+    reader.onerror = () => {
+      reject(
+        new Error(
+          'Unable to read the selected document.'
+        )
+      );
+    };
+
+    reader.readAsDataURL(
+      selectedFile
+    );
+  });
+};
 
   const onFileChange = (e) => {
     const f = e.target.files && e.target.files[0];
@@ -70,41 +123,147 @@ function PageContact({ navigate }) {
     if (input) input.value = '';
   };
 
-  const submit = (e) => {
-    e.preventDefault();
-    const errs = {};
-    if (!form.name.trim())    errs.name    = 'Required';
-    if (!form.company.trim()) errs.company = 'Required';
-    if (!form.email.trim())   errs.email   = 'Required';
-    else if (!/.+@.+\..+/.test(form.email)) errs.email = 'Invalid email';
-    if (!form.phone.trim())   errs.phone   = 'Required';
-    if (!form.country.trim()) errs.country = 'Required';
-    setErrors(errs);
-    if (Object.keys(errs).length === 0) {
-      // CRM-ready payload (logged for prototype). In production this would
-      // POST to a CRM endpoint; on failure the form would email sales01@dynalektric.com.
-      const payload = {
-        leadSource: 'Website RFQ',
-        name: form.name,
-        company: form.company,
-        email: form.email,
-        phone: form.phone,
-        country: form.country,
-        productInterest: form.product,
-        industry: form.industry,
-        requirementType: form.reqType,
-        quantityRange: form.qty,
-        message: form.message,
-        uploadedDocument: file ? { name: file.name, size: file.size, type: file.type } : null,
-        receivedAt: new Date().toISOString(),
-      };
-      // eslint-disable-next-line no-console
-      console.log('RFQ payload', payload);
-      setSubmitted(true);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-  };
+  const submit = async (e) => {
+  e.preventDefault();
 
+  if (isSubmitting) {
+    return;
+  }
+
+  const errs = {};
+
+  if (!form.name.trim()) {
+    errs.name = 'Required';
+  }
+
+  if (!form.company.trim()) {
+    errs.company = 'Required';
+  }
+
+  if (!form.email.trim()) {
+    errs.email = 'Required';
+  } else if (!/.+@.+\..+/.test(form.email)) {
+    errs.email = 'Invalid email';
+  }
+
+  if (!form.phone.trim()) {
+    errs.phone = 'Required';
+  }
+
+  if (!form.country.trim()) {
+    errs.country = 'Required';
+  }
+
+  setErrors(errs);
+  setSubmitError('');
+
+  if (Object.keys(errs).length > 0) {
+    return;
+  }
+
+  setIsSubmitting(true);
+
+  try {
+    let uploadedDocument = null;
+
+    if (file) {
+      const base64Data =
+        await fileToBase64(file);
+
+      uploadedDocument = {
+        name: file.name,
+        size: file.size,
+        type: file.type,
+        data: base64Data,
+      };
+    }
+
+    const payload = {
+      submissionId:
+        submissionIdRef.current,
+
+      leadSource:
+        'Website RFQ',
+
+      name:
+        form.name.trim(),
+
+      company:
+        form.company.trim(),
+
+      email:
+        form.email.trim(),
+
+      phone:
+        form.phone.trim(),
+
+      country:
+        form.country.trim(),
+
+      productInterest:
+        form.product,
+
+      industry:
+        form.industry,
+
+      requirementType:
+        form.reqType,
+
+      quantityRange:
+        form.qty,
+
+      message:
+        form.message.trim(),
+
+      uploadedDocument:
+        uploadedDocument,
+
+      receivedAt:
+        new Date().toISOString(),
+    };
+
+    const APPS_SCRIPT_URL =
+      'https://script.google.com/macros/s/AKfycby1UatbrZ2r8O-eeGhmKKyKbiTjHBOZ_vW-19MKHifZEd0cq4PGcXFw-0Jkoy71bWx2/exec';
+      
+    const response = await fetch(
+      APPS_SCRIPT_URL,
+      {
+        method: 'POST',
+        body: JSON.stringify(payload),
+      }
+    );
+
+    const result =
+      await response.json();
+
+    if (!result.success) {
+      throw new Error(
+        result.message ||
+        'Unable to submit your requirement.'
+      );
+    }
+
+    setLeadId(
+      result.leadId || ''
+    );
+
+    setSubmitted(true);
+
+   window.scrollTo({
+      top: 0,
+      behavior: 'smooth',
+    });
+
+  } catch (error) {
+   
+
+    setSubmitError(
+      'Unable to submit your requirement. Please try again.'
+    );
+
+    setIsSubmitting(false);
+  }
+};
   /* ============================
      Success state
      ============================ */
@@ -138,11 +297,32 @@ function PageContact({ navigate }) {
                 Thank you. Our team will review the details and respond with the next steps within one business day.
               </p>
               <div className="success-summary">
-                <div className="mono" style={{ color: 'var(--ink-muted)', marginBottom: 12 }}>Submission reference</div>
-                <div className="success-row">
-                  <span className="mono">Lead source</span>
-                  <span>Website RFQ</span>
-                </div>
+                <div
+  className="mono"
+  style={{
+    color: 'var(--ink-muted)',
+    marginBottom: 12
+  }}
+>
+  Submission reference
+</div>
+
+{leadId && (
+  <div className="success-row">
+    <span className="mono">
+      RFQ Reference
+    </span>
+
+    <span>
+      <strong>
+        {leadId}
+      </strong>
+    </span>
+  </div>
+)}
+
+
+
                 {form.product && (
                   <div className="success-row">
                     <span className="mono">Product interest</span>
@@ -174,15 +354,64 @@ function PageContact({ navigate }) {
                   </div>
                 )}
               </div>
-              <div style={{ display: 'flex', gap: 16, justifyContent: 'center', flexWrap: 'wrap', marginTop: 32 }}>
-                <button className="btn btn-secondary" onClick={() => {
-                  setSubmitted(false);
-                  setForm({ name: '', company: '', email: '', phone: '', country: '', product: '', industry: '', reqType: '', qty: '', message: '' });
-                  setFile(null);
-                  setErrors({});
-                }}>Submit another</button>
-                <button className="btn btn-primary" onClick={() => navigate('home')}>Back to home <span className="arrow">→</span></button>
-              </div>
+              <div
+  style={{
+    display: 'flex',
+    gap: 16,
+    justifyContent: 'center',
+    flexWrap: 'wrap',
+    marginTop: 32
+  }}
+>
+  <button
+    className="btn btn-secondary"
+    onClick={() => {
+      setSubmitted(false);
+
+      setForm({
+        name: '',
+        company: '',
+        email: '',
+        phone: '',
+        country: '',
+        product: '',
+        industry: '',
+        reqType: '',
+        qty: '',
+        message: ''
+      });
+
+      setFile(null);
+      setFileError('');
+      setErrors({});
+      setSubmitError('');
+      setLeadId('');
+      setIsSubmitting(false);
+
+      submissionIdRef.current =
+        crypto.randomUUID();
+
+      const input =
+        document.getElementById(
+          'rfq-file-input'
+        );
+
+      if (input) {
+        input.value = '';
+      }
+    }}
+  >
+    Submit another
+  </button>
+
+  <button
+    className="btn btn-primary"
+    onClick={() => navigate('home')}
+  >
+    Back to home{' '}
+    <span className="arrow">→</span>
+  </button>
+</div>
             </div>
           </div>
         </section>
@@ -342,12 +571,37 @@ function PageContact({ navigate }) {
               </p>
               {fileError && <span className="form-err">{fileError}</span>}
             </div>
+            {submitError && (
+  <div
+    className="form-err"
+    style={{
+      marginTop: 16,
+      marginBottom: 16,
+    }}
+  >
+    {submitError}
+  </div>
+)}
 
             <div className="form-footer">
               <p style={{ fontSize: 12, color: 'var(--ink-muted)', maxWidth: '46ch' }}>
                 Your details are used only to respond to this enquiry. They are not shared with third parties. Final supply terms are subject to engineering review.
               </p>
-              <button type="submit" className="btn btn-primary">Submit RFQ <span className="arrow">→</span></button>
+              <button
+  type="submit"
+  className="btn btn-primary"
+  disabled={isSubmitting}
+>
+  {isSubmitting ? (
+    'Submitting...'
+  ) : (
+    <>
+      Submit RFQ
+      {' '}
+      <span className="arrow">→</span>
+    </>
+  )}
+</button>
             </div>
           </form>
 
