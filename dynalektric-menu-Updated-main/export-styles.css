@@ -195,10 +195,23 @@
   height: 52px;
   border: 1px dashed rgba(255,255,255,0.18);
   border-radius: var(--radius);
-  display: flex; align-items: center; justify-content: center;
-  font-family: var(--font-mono);
-  font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase;
-  color: rgba(244,244,241,0.4);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: #fff;          /* Add this */
+  padding: 8px;              /* Optional */
+  overflow: hidden;          /* Optional */
+}
+
+.export-logo-slot img {
+  max-width: 80%;
+  max-height: 80%;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
 }
 .export-verify-actions { display: flex; flex-direction: column; gap: 10px; }
 .export-verify-actions .btn { justify-content: center; }
