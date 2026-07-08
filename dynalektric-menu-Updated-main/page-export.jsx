@@ -291,11 +291,11 @@ const JOURNEY_PHASES = [
 ];
 const EXPORT_CUSTOMER_LOGOS = [
   "./assets/Logo-1.webp",
-  "./assets/logo-2.webp",
-  "./assets/logo-3.webp",
-  "./assets/logo-4.webp",
-  "./assets/logo-5.webp",
-  "./assets/logo-6.webp",
+  "./assets/Logo-2.webp",
+  "./assets/Logo-3.webp",
+  "./assets/Logo-4.webp",
+  "./assets/Logo-5.webp",
+  "./assets/Logo-6.webp",
 ];
 
 /* ============================================================
