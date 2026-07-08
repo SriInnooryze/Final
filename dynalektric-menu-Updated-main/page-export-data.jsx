@@ -62,7 +62,7 @@ const EXP_LEGAL = [
   { k: 'CIN', v: 'Awaiting client-approved value' },
   { k: 'GST', v: 'Awaiting client-approved value' },
   { k: 'IEC (Importer Exporter Code)', v: 'On file, reference on request' },
-  { k: 'Registered address', v: 'Awaiting client-approved value' },
+  { k: 'Registered address', v: 'Dynalektric Pvt. Ltd. Manufacturing facility, No-49/2, Vaderamanchanahalli Village,Kallubalu, Anekal Taluk, Jigani Hobli,Bangalore, India- 560105' },
   { k: 'D-U-N-S number', v: 'Provided if available on request' },
 ];
 const EXP_FINANCIAL = [
