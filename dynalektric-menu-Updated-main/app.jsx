@@ -16,7 +16,7 @@ const ACCENT_OPTIONS = [
 ];
 
 const PAGE_URLS = {
-  home:       './Dynalektric.html',
+  home:       './index.html',
   about:      './about.html',
   products:   './products-solutions.html',
   rnd:        './innovation-rd.html',

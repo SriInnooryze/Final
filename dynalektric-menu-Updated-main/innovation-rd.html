@@ -21,7 +21,9 @@
   <meta property="og:description" content="Explore Dynalektric's innovation, engineering and product development capability from feasibility and design through prototyping, testing and production." />
   <meta property="og:url" content="https://dynalektric.com/innovation-rd.html" />
   <meta property="og:image" content="https://dynalektric.com/assets/hero-poster.jpg" />
-  <!-- TODO: Replace og:image with a 1200×630 brand image before deployment -->
+  <meta property="og:image:width" content="1672" />
+  <meta property="og:image:height" content="941" />
+  <meta property="og:image:alt" content="Dynalektric engineering and product development capability" />
   <meta property="og:locale" content="en_US" />
 
   <!-- Twitter / X -->
@@ -29,12 +31,14 @@
   <meta name="twitter:title" content="Innovation Portfolio | Dynalektric Engineering and R&amp;D" />
   <meta name="twitter:description" content="Explore Dynalektric's innovation, engineering and product development capability from feasibility and design through prototyping, testing and production." />
   <meta name="twitter:image" content="https://dynalektric.com/assets/hero-poster.jpg" />
+  <meta name="twitter:image:alt" content="Dynalektric engineering and product development capability" />
 
   <!-- Structured data -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "WebPage",
+    "@type": "WebPage"
+    "@id": "https://dynalektric.com/innovation-rd.html#webpage",
     "name": "Innovation Portfolio",
     "url": "https://dynalektric.com/innovation-rd.html",
     "description": "Explore Dynalektric's innovation, engineering and product development capability from feasibility and design through prototyping, testing and production.",
@@ -70,8 +74,10 @@
   <meta name="ext-resource-dependency" content="assets/facility-wide-shot-optimized.webp" data-resource-id="facilityWideShot" />
   <meta name="ext-resource-dependency" content="assets/export-hero-optimized.webp" data-resource-id="exportHero" />
 
-  <!-- Favicon: add favicon.ico and apple-touch-icon.png to project root before deployment -->
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="assets/dynalektric-logo.png" />
 
+    <link rel="preload" href="assets/innovation-hero-optimized.webp" as="image" type="image/webp" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -103,17 +109,14 @@
   <!-- Web component for image slots -->
   <script src="image-slot.js"></script>
 
-  <!-- React + Babel -->
+  <!-- React (CDN) -- ReactDOM (CDN) -- JSX compiled at build time by esbuild, no Babel at runtime -->
   <script src="https://unpkg.com/react@18.3.1/umd/react.production.min.js" crossorigin="anonymous"></script>
   <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js" crossorigin="anonymous"></script>
-  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
-
-  <!-- Tweaks panel + shared + header + page + app -->
-  <script type="text/babel" src="tweaks-panel.jsx"></script>
-  <script type="text/babel" src="shared.jsx"></script>
-  <script type="text/babel" src="header.jsx"></script>
-  <script type="text/babel" src="page-rnd.jsx"></script>
-  <script type="text/babel" src="app.jsx"></script>
+  <script src="build/tweaks-panel.js"></script>
+  <script src="build/shared.js"></script>
+  <script src="build/header.js"></script>
+  <script src="build/page-rnd.js"></script>
+  <script src="build/app.js"></script>
 </body>
 </html>
 

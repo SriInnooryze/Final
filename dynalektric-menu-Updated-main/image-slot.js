@@ -72,6 +72,16 @@
   let loadP = null;
 
   function load() {
+    // The sidecar is written exclusively by the omelette design-tool host.
+    // In production (no window.omelette) the file never exists — skip the
+    // fetch to avoid a noisy 404, and resolve immediately so connectedCallback
+    // can proceed normally (slots will still show src= or empty state).
+    if (!window.omelette) {
+      if (!loadP) {
+        loadP = Promise.resolve().then(() => { loaded = true; subs.forEach((fn) => fn()); });
+      }
+      return loadP;
+    }
     if (loadP) return loadP;
     loadP = fetch(STATE_FILE)
       .then((r) => (r.ok ? r.json() : null))

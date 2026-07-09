@@ -782,7 +782,7 @@ function Footer() {
 
             <nav aria-label="Footer navigation">
               <ul>
-                <li><a href="./Dynalektric.html">Home</a></li>
+                <li><a href="./index.html">Home</a></li>
                 <li><a href="./about.html">About</a></li>
                 <li>
                   <a href="./products-solutions.html">
@@ -823,10 +823,10 @@ function Footer() {
             <h4>Enquiries</h4>
 
             <ul>
-              <li><a>+91-903 554 2821</a></li>
-              <li><a>+91-903 554 2827</a></li>
-              <li><a>sales01@dynalektric.com</a></li>
-              <li><a>cs@dynalektric.com</a></li>
+              <li><a href="tel:+919035542821">+91-903 554 2821</a></li>
+              <li><a href="tel:+919035542827">+91-903 554 2827</a></li>
+              <li><a href="mailto:sales01@dynalektric.com">sales01@dynalektric.com</a></li>
+              <li><a href="mailto:cs@dynalektric.com">cs@dynalektric.com</a></li>
               <li>
                 <a href="./contact.html">
                   Submit RFQ →

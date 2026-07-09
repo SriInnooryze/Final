@@ -1,7 +1,7 @@
 /* header.jsx — shared site header and mobile drawer */
 
 const NAV_LINKS = [
-  { id: 'home',       label: 'Home',                        href: './Dynalektric.html' },
+  { id: 'home',       label: 'Home',                        href: './index.html' },
   { id: 'about',      label: 'About',                       href: './about.html' },
   { id: 'products',   label: 'Products & Solutions',        href: './products-solutions.html' },
   { id: 'rnd',        label: 'Innovation Portfolio',         href: './innovation-rd.html' },
@@ -18,7 +18,7 @@ function Header() {
     <>
       <header className="topbar" role="banner">
         <div className="topbar-inner">
-          <a className="topbar-logo" href="./Dynalektric.html" aria-label="Dynalektric home">
+          <a className="topbar-logo" href="./index.html" aria-label="Dynalektric home">
             <img src={(window.__resources && window.__resources.dynaLogo) || "assets/dynalektric-logo.png"} alt="Dynalektric, Power Motion Safety" width="350" height="150" decoding="async" />
           </a>
           <nav className="topbar-nav" aria-label="Main navigation">

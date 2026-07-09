@@ -3,6 +3,11 @@ const http = require("http");
 const fs = require("fs");
 const path = require("path");
 
+// Step 0: Compile JSX source to browser-ready JavaScript before prerendering.
+// This replaces Babel Standalone runtime compilation with a build-time step.
+console.log("Compiling JSX to JavaScript (esbuild)...");
+require("./build-js.cjs");
+
 const ROOT_DIR = __dirname;
 const OUTPUT_DIR = path.join(ROOT_DIR, "dist");
 const PORT = 4173;
@@ -31,6 +36,7 @@ const staticItems = [
   "page-export-data.jsx",
   "page-export.jsx",
   "app.jsx",
+  "build",
   "robots.txt",
   "sitemap.xml",
 ];
@@ -73,6 +79,7 @@ const server = http.createServer((req, res) => {
   const filePath = path.join(ROOT_DIR, requestPath);
 
   if (!filePath.startsWith(ROOT_DIR)) {
+    console.log(`[prerender-server] 403 Forbidden: ${req.url}`);
     res.writeHead(403);
     res.end("Forbidden");
     return;
@@ -80,7 +87,9 @@ const server = http.createServer((req, res) => {
 
   fs.readFile(filePath, (error, content) => {
     if (error) {
-      res.writeHead(error.code === "ENOENT" ? 404 : 500);
+      const status = error.code === "ENOENT" ? 404 : 500;
+      console.log(`[prerender-server] ${status} ${error.code === "ENOENT" ? "Not Found" : "Error"}: ${req.url}`);
+      res.writeHead(status);
       res.end(error.code === "ENOENT" ? "Not Found" : "Server Error");
       return;
     }
@@ -88,6 +97,7 @@ const server = http.createServer((req, res) => {
     const extension = path.extname(filePath).toLowerCase();
     const contentType = mimeTypes[extension] || "application/octet-stream";
 
+    console.log(`[prerender-server] 200 OK: ${req.url}`);
     res.writeHead(200, {
       "Content-Type": contentType,
     });

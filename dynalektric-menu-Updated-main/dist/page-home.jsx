@@ -511,7 +511,7 @@ function HeroVideo({ navigate }) {
             objectPosition: 'center top',
           }}
         >
-          <source src="./public/videos/Dynalektric_Hero.mp4" type="video/mp4" />
+          <source src="./public/videos/Dynalektric_Hero-optimized.mp4" type="video/mp4" />
           Your browser does not support background video.
         </video>
       </div>
