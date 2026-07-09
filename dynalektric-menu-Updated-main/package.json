@@ -1,0 +1,17 @@
+{
+  "name": "dynalektric-menu-updated-main",
+  "version": "1.0.0",
+  "description": "",
+  "main": "image-slot.js",
+  "scripts": {
+  "build:staging": "set BUILD_MODE=staging&& node prerender.cjs",
+  "build:production": "set BUILD_MODE=production&& node prerender.cjs"
+},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "puppeteer": "^25.3.0"
+  }
+}

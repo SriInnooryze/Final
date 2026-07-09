@@ -7,7 +7,7 @@
   <!-- Primary metadata -->
   <title>Products and Solutions | Dynalektric</title>
   <meta name="description" content="Explore Dynalektric solutions across magnetics, control panel assemblies, power electronics systems and integrated electrical components." />
-  <meta name="robots" content="index, follow" />
+  <meta name="robots" content="noindex, nofollow" />
   <meta name="author" content="Dynalektric" />
   <meta name="theme-color" content="#0077B6" />
 
@@ -32,19 +32,53 @@
 
   <!-- Structured data -->
   <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "CollectionPage",
-    "name": "Products and Solutions",
-    "url": "https://dynalektric.com/products-solutions.html",
-    "description": "Explore Dynalektric solutions across magnetics, control panel assemblies, power electronics systems and integrated electrical components.",
-    "isPartOf": {
-      "@type": "WebSite",
-      "name": "Dynalektric",
-      "url": "https://dynalektric.com/"
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "CollectionPage",
+      "@id": "https://dynalektric.com/products-solutions.html#webpage",
+      "name": "Products and Solutions",
+      "url": "https://dynalektric.com/products-solutions.html",
+      "description": "Explore Dynalektric solutions across magnetics, control panel assemblies, power electronics systems and integrated electrical components.",
+      "isPartOf": {
+        "@id": "https://dynalektric.com/#website"
+      },
+      "mainEntity": {
+        "@id": "https://dynalektric.com/products-solutions.html#product-groups"
+      }
+    },
+    {
+      "@type": "ItemList",
+      "@id": "https://dynalektric.com/products-solutions.html#product-groups",
+      "name": "Dynalektric Product Groups",
+      "numberOfItems": 4,
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Magnetics"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Control Panel Assemblies"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Power Electronics Systems"
+        },
+        {
+          "@type": "ListItem",
+          "position": 4,
+          "name": "Cross-Segment Solutions"
+        }
+      ]
     }
-  }
-  </script>
+  ]
+}
+</script>
 
   <!-- Resources referenced from JSX (lifted for the standalone bundler) -->
   <meta name="ext-resource-dependency" content="assets/dynalektric-logo.png" data-resource-id="dynaLogo" />
@@ -112,3 +146,6 @@
   <script type="text/babel" src="app.jsx"></script>
 </body>
 </html>
+
+
+
