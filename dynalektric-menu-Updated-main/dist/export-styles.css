@@ -192,7 +192,7 @@
 .export-map .mono { color: rgba(244,244,241,0.45); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; }
 .export-logo-row { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 18px; }
 .export-logo-slot {
-  height: 52px;
+  height: 80px;
   border: 1px dashed rgba(255,255,255,0.18);
   border-radius: var(--radius);
 

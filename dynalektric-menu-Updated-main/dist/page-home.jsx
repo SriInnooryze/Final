@@ -437,6 +437,7 @@ function HeroVideo({ navigate }) {
   React.useEffect(() => {
     const mq = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
     const video = videoRef.current;
+   
 
     const applyMotionPreference = () => {
       if (!video || !mq) return;

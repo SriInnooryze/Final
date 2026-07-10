@@ -56,9 +56,9 @@ function ExportCapabilityTabs() {
                   <h3>{d.title}</h3>
                   <p>{d.note}</p>
                 </div>
-                <button className="exp-textlink" onClick={() => exportTrack('certificate_download', { doc: d.title })}>
+                {/*<button className="exp-textlink" onClick={() => exportTrack('certificate_download', { doc: d.title })}>
                   Preview <span aria-hidden="true">→</span>
-                </button>
+                </button>*/}
               </div>
             ))}
           </div>
@@ -290,12 +290,15 @@ const JOURNEY_PHASES = [
   },
 ];
 const EXPORT_CUSTOMER_LOGOS = [
-  "./assets/Logo-1.webp",
-  "./assets/Logo-2.webp",
-  "./assets/Logo-3.webp",
-  "./assets/Logo-4.webp",
-  "./assets/Logo-5.webp",
-  "./assets/Logo-6.webp",
+  "./assets/Logo1.webp",
+  "./assets/Logo2.webp",
+  "./assets/Logo3.webp",
+  "./assets/Logo4.1.png",
+  "./assets/Logo5.webp",
+  "./assets/Logo6.jpg",
+  "./assets/Logo7.webp",
+  "./assets/Logo8.webp",
+  "./assets/Logo9.webp", 
 ];
 
 /* ============================================================
@@ -537,9 +540,9 @@ function PageExport({ navigate }) {
 </div>
               </div>
               <div className="export-verify-actions">
-                <button className="btn btn-primary" onClick={() => exportTrack('company_verification_download')}>
+               {/* <button className="btn btn-primary" onClick={() => exportTrack('company_verification_download')}>
                   Download Company Verification Pack <span className="arrow" aria-hidden="true">→</span>
-                </button>
+                </button> */}
                 <button className="btn btn-ghost on-dark" onClick={() => exportTrack('clearance_scheme_view', { action: 'view_address' })}>
                   View Registered Address
                 </button>
